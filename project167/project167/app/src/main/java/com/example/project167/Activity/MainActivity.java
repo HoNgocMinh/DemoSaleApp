@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         //ConstraintLayout btn1=findViewById(R.id.currentCourse);
         //btn1.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesListActivity.class)));
 
-        statusBarColor();
+         statusBarColor();
          initRecyclerView();
          topNavigation();
          bottomNavigation();
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         binding.currentCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesListActivity.class)));
     }
     private void botNavigation() {
-        binding.myProfile.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesListActivity.class)));
+        binding.btnMyProfile.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ProfileActivity.class)));
     }
 
 

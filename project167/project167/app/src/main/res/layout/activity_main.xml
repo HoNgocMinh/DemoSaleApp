@@ -20,7 +20,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/top_background"
+                android:background="@drawable/top_background_main"
                 android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +31,7 @@
                     android:layout_marginEnd="24dp">
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/txt_Hello"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Xin chào"
@@ -40,14 +40,15 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/txt_UserName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="KHÁCH BÁOOO"
                         android:textColor="@color/white"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/textView"
-                        app:layout_constraintTop_toBottomOf="@+id/textView" />
+                        android:textSize="21sp"
+                        app:layout_constraintStart_toStartOf="@+id/txt_Hello"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_Hello" />
 
                     <ImageView
                         android:id="@+id/btn_Cart"
@@ -71,15 +72,15 @@
                         app:layout_constraintTop_toTopOf="@+id/btn_Cart" />
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/txt_iconNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="1"
                         android:textColor="@color/white"
                         android:textSize="11sp"
-                        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-                        app:layout_constraintStart_toStartOf="@+id/imageView3"
-                        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+                        app:layout_constraintEnd_toEndOf="@+id/icon_Number"
+                        app:layout_constraintStart_toStartOf="@+id/icon_Number"
+                        app:layout_constraintTop_toTopOf="@+id/icon_Number" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -135,12 +136,12 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button"
+                    android:id="@+id/btn_LearnNow"
                     style="@android:style/Widget.Button"
                     android:layout_width="80dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/purple_background"
+                    android:background="@drawable/blue_background"
                     android:text="Học ngay!"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/textView5"
@@ -149,12 +150,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/txtCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:text="Danh mục"
-                android:textColor="@color/black"
+                android:textColor="@color/dark_blue"
                 android:textSize="19sp"
                 android:textStyle="bold" />
 
@@ -166,6 +167,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/btn_Category1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -179,7 +181,7 @@
                         app:srcCompat="@drawable/cat1" />
 
                     <TextView
-                        android:id="@+id/textView72"
+                        android:id="@+id/txt_Category1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -189,6 +191,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btn_Category2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -202,7 +205,7 @@
                         app:srcCompat="@drawable/cat2" />
 
                     <TextView
-                        android:id="@+id/textView76"
+                        android:id="@+id/txt_Category2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -212,6 +215,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btn_Category3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -225,7 +229,7 @@
                         app:srcCompat="@drawable/cat3" />
 
                     <TextView
-                        android:id="@+id/textView73"
+                        android:id="@+id/txt_Category3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -235,6 +239,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btn_Category4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -248,7 +253,7 @@
                         app:srcCompat="@drawable/cat4" />
 
                     <TextView
-                        android:id="@+id/textView74"
+                        android:id="@+id/txt_Category4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -258,6 +263,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btn_SeeAllCategory"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -272,7 +278,7 @@
                         app:srcCompat="@drawable/cat5" />
 
                     <TextView
-                        android:id="@+id/textView75"
+                        android:id="@+id/txt_SeeAll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -291,22 +297,22 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/txt_PopularCourse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Khóa học phổ biến"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dark_blue"
                     android:textSize="19sp"
 
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/seeMore"
+                    android:id="@+id/btn_seeMorePopularCourse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Xem thêm"
-                    android:textColor="@color/purple_light" />
+                    android:textColor="@color/dark_blue" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -342,67 +348,72 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
+                    android:id="@+id/btn_home"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView61"
+                        android:id="@+id/icon_home"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/btn_1" />
+                        android:src="@drawable/home_fill"
+                        android:tint="@color/dark_blue" />
 
                     <TextView
-                        android:id="@+id/btn_MainExplorer"
+                        android:id="@+id/txt_home"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Khám phá"
+                        android:textColor="@color/dark_blue"
+                        android:text="Trang chủ"
                         android:textAlignment="center" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/currentCourse"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
-                    android:orientation="vertical"
-                    android:visibility="visible">
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView63"
+                        android:id="@+id/icon_Course"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:src="@drawable/btn_1"
-                        android:visibility="invisible" />
+                        android:visibility="visible"
+                        app:srcCompat="@drawable/book_line" />
 
                     <TextView
-                        android:id="@+id/textView103"
+                        android:id="@+id/txt_Courses"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="Khóa học của tôi"
-                        android:textStyle="bold"
                         android:textAlignment="center" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/btn_MyProfile"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView6"
+                        android:id="@+id/icon_MyProfile"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/btn_4" />
+                        android:src="@drawable/btn_4"
+                        app:srcCompat="@drawable/person_line" />
 
                     <TextView
-                        android:id="@+id/myProfile"
+                        android:id="@+id/txt_myProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -412,15 +423,5 @@
             </LinearLayout>
         </com.google.android.material.bottomappbar.BottomAppBar>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/currentCourse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/book"
-            android:visibility="visible"
-            app:backgroundTint="@color/purple_Dark"
-            app:layout_anchor="@id/appBar"
-            app:maxImageSize="30dp"
-            app:tint="@color/white" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

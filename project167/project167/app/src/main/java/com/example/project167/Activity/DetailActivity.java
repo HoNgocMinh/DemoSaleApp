@@ -56,4 +56,5 @@ public class DetailActivity extends AppCompatActivity {
 
         binding.backBtn.setOnClickListener(v -> finish());
     }
+
 }
