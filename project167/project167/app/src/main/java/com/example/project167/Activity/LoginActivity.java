@@ -1,5 +1,6 @@
 package com.example.project167.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private TextView txtForgotPassword;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +27,10 @@ public class LoginActivity extends AppCompatActivity {
         inputPassword = findViewById(R.id.editTextTextPassword);
         btnLogin = findViewById(R.id.btn_login);
         txtForgotPassword = findViewById(R.id.txt_forgotPwd);
+        //
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String savedEmail = sharedPreferences.getString("userEmail", "");
+        String savedPassword = sharedPreferences.getString("userPassword", "");
 
         // Xử lý sự kiện nút Đăng nhập
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -33,14 +39,10 @@ public class LoginActivity extends AppCompatActivity {
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
 
-                // Set tài khoản cứng (chưa dùng đến SQLite)
-                String hardcodedEmail = "admin";
-                String hardcodedPassword = "123456";
-
                 // Kiểm tra thông tin nhập vào
                 if (email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else if (email.equals(hardcodedEmail) && password.equals(hardcodedPassword)) {
+                } else if (email.equals(savedEmail) && password.equals(savedPassword)) {
                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
 
                     // Chuyển sang màn hình chính sau khi đăng nhập thành công
@@ -57,7 +59,9 @@ public class LoginActivity extends AppCompatActivity {
         txtForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "Tính năng này chưa được hỗ trợ", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

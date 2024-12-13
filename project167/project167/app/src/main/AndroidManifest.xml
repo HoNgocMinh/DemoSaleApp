@@ -22,8 +22,14 @@
             android:name=".Activity.DetailActivity"
             android:exported="false" />
 
+        <!-- SignUpActivity -->
+        <activity android:name=".Activity.SignUpActivity"
+            android:exported="false"/>
+
+        <!--MainActivity-->
         <activity android:name=".Activity.MainActivity"
             android:exported="false"/>
+
 
         <!-- IntroActivity -->
         <activity
