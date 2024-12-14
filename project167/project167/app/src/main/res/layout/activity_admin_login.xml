@@ -49,7 +49,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/input_username"
+            android:id="@+id/input_username_admin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="12dp"
@@ -73,7 +73,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/input_Pwd"
+            android:id="@+id/input_Pwd_admin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="12dp"

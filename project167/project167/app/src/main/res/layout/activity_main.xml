@@ -174,7 +174,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView51"
+                        android:id="@+id/imageViewProgramme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
@@ -198,7 +198,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView52"
+                        android:id="@+id/imageViewLanguage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
@@ -222,7 +222,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView53"
+                        android:id="@+id/imageViewDesign"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
@@ -246,7 +246,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView54"
+                        android:id="@+id/imageViewCook"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
@@ -270,7 +270,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView55"
+                        android:id="@+id/imageViewSeeAll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -384,7 +384,6 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/btn_1"
                         android:visibility="visible"
                         app:srcCompat="@drawable/book_line" />
 

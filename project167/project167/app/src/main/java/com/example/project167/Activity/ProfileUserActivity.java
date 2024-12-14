@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
-import com.example.project167.R;
 import com.example.project167.databinding.ActivityProfileBinding;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileUserActivity extends AppCompatActivity {
     ActivityProfileBinding binding;
 
     @Override
@@ -25,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void CourseNavigation() {
         binding.btnCourse.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, CoursesListActivity.class);
+            Intent intent = new Intent(ProfileUserActivity.this, CoursesListActivity.class);
             // Xóa ProfileActivity khỏi stack
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
@@ -36,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void MainNavigation() {
         binding.btnHome.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+            Intent intent = new Intent(ProfileUserActivity.this, MainActivity.class);
             //
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
@@ -53,8 +53,10 @@ public class ProfileActivity extends AppCompatActivity {
             editor.putBoolean("isLoggedIn", false);  // Đặt lại trạng thái là chưa đăng nhập
             editor.apply();
 
+            Toast.makeText(ProfileUserActivity.this, "Đã đăng xuất thành công", Toast.LENGTH_SHORT).show();
+
             // Chuyển hướng về màn hình đăng nhập
-            Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+            Intent intent = new Intent(ProfileUserActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
             finish();

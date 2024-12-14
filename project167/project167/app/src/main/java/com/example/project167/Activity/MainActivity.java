@@ -1,14 +1,11 @@
 package com.example.project167.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
+import android.content.SharedPreferences;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 
 import com.example.project167.Adapter.PopularAdapter;
@@ -33,18 +30,36 @@ public class MainActivity extends AppCompatActivity {
          statusBarColor();
          initRecyclerView();
          CartNavigation();
-         CourseNavigation();
+//       CourseNavigation(); (Điều hướng sang trang mới)
          ProfileNavigation();
+         SeeMoreCourseNavigation();
+    }
+
+    private void SeeMoreCourseNavigation(){
+        binding.btnSeeMorePopularCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesListActivity.class)));
     }
 
     private void CartNavigation() {
         binding.btnCart.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
     }
-    private void CourseNavigation() {
-        binding.currentCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesListActivity.class)));
-    }
+//    private void CourseNavigation() {
+//        binding.currentCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesListActivity.class)));
+//    }
     private void ProfileNavigation() {
-        binding.btnMyProfile.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ProfileActivity.class)));
+        binding.btnMyProfile.setOnClickListener(v -> {
+            // Lấy trạng thái đăng nhập từ SharedPreferences
+            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+            if (isLoggedIn) {
+                // Nếu đã đăng nhập, chuyển đến màn hình Profile
+                Intent intent = new Intent(MainActivity.this, ProfileUserActivity.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(MainActivity.this, LoginUserActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
