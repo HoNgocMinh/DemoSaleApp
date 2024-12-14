@@ -1,16 +1,16 @@
 package com.example.project167.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityProfileBinding;
 
-
 public class ProfileActivity extends AppCompatActivity {
     ActivityProfileBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,24 +19,12 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         MainNavigation();
-        CourseNavigation1();
-        CourseNavigation2();
+        CourseNavigation();
         LogoutNavigation();
     }
 
-    private void CourseNavigation1() {
-        binding.btnMyCourse1.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileActivity.this, CoursesListActivity.class);
-            // Xóa ProfileActivity khỏi stack
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-            // Áp dụng hiệu ứng mượt giống như nút Back
-            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-        });
-    }
-
-    private void CourseNavigation2() {
-        binding.btnMyCourse2.setOnClickListener(v -> {
+    private void CourseNavigation() {
+        binding.btnCourse.setOnClickListener(v -> {
             Intent intent = new Intent(ProfileActivity.this, CoursesListActivity.class);
             // Xóa ProfileActivity khỏi stack
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -57,7 +45,19 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void LogoutNavigation(){
-        binding.btnLogout.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this, LoginActivity.class)));
+    private void LogoutNavigation() {
+        binding.btnLogout.setOnClickListener(v -> {
+            // Xóa trạng thái đăng nhập
+            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isLoggedIn", false);  // Đặt lại trạng thái là chưa đăng nhập
+            editor.apply();
+
+            // Chuyển hướng về màn hình đăng nhập
+            Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            finish();
+        });
     }
 }

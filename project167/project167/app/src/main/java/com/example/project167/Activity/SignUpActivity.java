@@ -40,7 +40,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        //Xử lí lệnh quay lại đăng nhập
+        // Xử lý sự kiện quay lại màn hình đăng nhập
         txt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,12 +63,21 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
+        // Kiểm tra xem tên đăng nhập đã tồn tại chưa
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String savedUserName = sharedPreferences.getString("userName", "");
+        if (UserName.equals(savedUserName)) {
+            Toast.makeText(SignUpActivity.this, "Tên đăng nhập đã tồn tại, vui lòng chọn tên khác", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Kiểm tra mật khẩu xác nhận
         if (!password.equals(confirmPassword)) {
             Toast.makeText(SignUpActivity.this, "Mật khẩu xác nhận không khớp", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Hiện thông báo đăng ký thành công (thay bằng logic lưu trữ sau)
+        // Hiện thông báo đăng ký thành công và lưu thông tin người dùng
         Toast.makeText(SignUpActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
         saveUser(fullName, UserName, password);
 
@@ -83,8 +92,16 @@ public class SignUpActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("userFullName", fullName);
         editor.putString("userName", UserName);
-        editor.putString("userPassword", password); // Không khuyến khích lưu mật khẩu dưới dạng plaintext
+
+        // Mã hóa mật khẩu trước khi lưu
+        String encryptedPassword = encryptPassword(password);
+        editor.putString("userPassword", encryptedPassword);  // Lưu mật khẩu đã mã hóa
         editor.apply();
     }
 
+    // Phương thức mã hóa mật khẩu (ví dụ đơn giản, bạn có thể sử dụng một thuật toán mã hóa mạnh hơn)
+    private String encryptPassword(String password) {
+        // Mã hóa đơn giản bằng cách chuyển mật khẩu thành hash
+        return String.valueOf(password.hashCode());  // Đây chỉ là ví dụ, bạn nên dùng một phương pháp mã hóa an toàn hơn
+    }
 }

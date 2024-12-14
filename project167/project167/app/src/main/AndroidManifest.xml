@@ -27,7 +27,7 @@
             android:exported="false"/>
 
         <!--MainActivity-->
-        <activity android:name=".Activity.MainActivity"
+        <activity android:name=".Activity.LoginActivity"
             android:exported="false"/>
 
         <!--MainActivity-->
@@ -50,7 +50,7 @@
         <!--Sửa đổi login ra trước Main (test chức năng Login)-->
         <!-- MainActivity -->
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".Activity.MainActivity"
             android:exported="true" />
     </application>
 </manifest>

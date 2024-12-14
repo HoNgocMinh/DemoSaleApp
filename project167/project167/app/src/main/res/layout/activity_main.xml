@@ -393,7 +393,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Khóa học của tôi"
+                        android:text="Khóa học"
                         android:textAlignment="center" />
                 </LinearLayout>
 

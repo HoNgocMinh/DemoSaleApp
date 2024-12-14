@@ -17,7 +17,7 @@ public class IntroActivity extends AppCompatActivity {
 
         new Handler().postDelayed(() -> {
             // Chuyển sang MainActivity
-            startActivity(new Intent(IntroActivity.this, LoginActivity.class)); //Test chức năng của Login <MainActivity>
+            startActivity(new Intent(IntroActivity.this, MainActivity.class)); //Test chức năng của Login <MainActivity>
             // Kết thúc IntroActivity
             finish();
         }, 3000); // 3000ms = 3 giây

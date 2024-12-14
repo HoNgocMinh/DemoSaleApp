@@ -134,7 +134,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/btn_MyCourse_2"
+                    android:id="@+id/btn_MyCourse"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="12dp"
@@ -296,7 +296,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/btn_MyCourse_1"
+                    android:id="@+id/btn_Course"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -314,7 +314,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Khóa học của tôi"
+                        android:text="Khóa học"
                         android:textAlignment="center" />
                 </LinearLayout>
 
