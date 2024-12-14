@@ -32,18 +32,18 @@ public class MainActivity extends AppCompatActivity {
 
          statusBarColor();
          initRecyclerView();
-         topNavigation();
-         bottomNavigation();
-         botNavigation();
+         CartNavigation();
+         CourseNavigation();
+         ProfileNavigation();
     }
 
-    private void topNavigation() {
+    private void CartNavigation() {
         binding.btnCart.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
     }
-    private void bottomNavigation() {
+    private void CourseNavigation() {
         binding.currentCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesListActivity.class)));
     }
-    private void botNavigation() {
+    private void ProfileNavigation() {
         binding.btnMyProfile.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ProfileActivity.class)));
     }
 
