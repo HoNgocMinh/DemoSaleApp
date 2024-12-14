@@ -28,18 +28,19 @@
                     android:id="@+id/img_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="64dp"
                     android:src="@drawable/profile"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/txt_UserFullName"
+                    android:id="@+id/txt_adminFullName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Nguyễn Thị Gà"
+                    android:text="Gà gà gà trùm"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -51,12 +52,12 @@
                     android:id="@+id/txt_UserRole"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Học viên"
+                    android:text="Admin"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/txt_UserFullName"
-                    app:layout_constraintStart_toStartOf="@+id/txt_UserFullName"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_UserFullName" />
+                    app:layout_constraintEnd_toEndOf="@+id/txt_adminFullName"
+                    app:layout_constraintStart_toStartOf="@+id/txt_adminFullName"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_adminFullName" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -67,34 +68,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                    <LinearLayout
-                        android:id="@+id/numberOfCourse"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.3333"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txt_numberOfCourse"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="120"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/txt_Course"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="khóa đang học"
-                            android:textAlignment="center"
-                            android:textColor="@color/white" />
-                    </LinearLayout>
-                </LinearLayout>
+                    app:layout_constraintStart_toStartOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -107,7 +81,7 @@
                 android:padding="24dp">
 
                 <LinearLayout
-                    android:id="@+id/btn_myProfile"
+                    android:id="@+id/btn_userManager"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="12dp"
@@ -124,12 +98,12 @@
                         app:srcCompat="@drawable/edit_profile" />
 
                     <TextView
-                        android:id="@+id/txt_myProfile"
+                        android:id="@+id/txt_userManager"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Thông tin cá nhân"
+                        android:text="Quản lý User"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -153,19 +127,19 @@
                         app:srcCompat="@drawable/favorite" />
 
                     <TextView
-                        android:id="@+id/txt_myCourses"
+                        android:id="@+id/txt_CategoryManager"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Khóa học của tôi"
+                        android:text="Quản lý Danh mục Sản phẩm"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/btn_changePwd"
+                    android:id="@+id/btn_CategoryManager"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="12dp"
@@ -187,7 +161,36 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Thay đổi mật khẩu"
+                        android:text="Quản lý Sản phẩm"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_ProductManager"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/light_background"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/icon_removeAccount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:srcCompat="@drawable/remove_acc" />
+
+                    <TextView
+                        android:id="@+id/txt_removeAccount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:text="Quản lý Đơn hàng"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -221,35 +224,6 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btn_removeAccount"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:background="@drawable/light_background"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/icon_removeAccount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        app:srcCompat="@drawable/remove_acc" />
-
-                    <TextView
-                        android:id="@+id/txt_removeAccount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_weight="1"
-                        android:text="Xóa tài khoản"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
