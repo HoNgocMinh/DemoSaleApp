@@ -21,6 +21,7 @@ public class ProfileActivity extends AppCompatActivity {
         MainNavigation();
         CourseNavigation1();
         CourseNavigation2();
+        LogoutNavigation();
     }
 
     private void CourseNavigation1() {
@@ -54,5 +55,9 @@ public class ProfileActivity extends AppCompatActivity {
             //
             overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         });
+    }
+
+    private void LogoutNavigation(){
+        binding.btnLogout.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this, LoginActivity.class)));
     }
 }
