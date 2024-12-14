@@ -18,12 +18,13 @@ public class ProfileActivity extends AppCompatActivity {
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        CourseNavigation();
         MainNavigation();
+        CourseNavigation1();
+        CourseNavigation2();
     }
 
-    private void CourseNavigation() {
-        binding.btnMyCourse.setOnClickListener(v -> {
+    private void CourseNavigation1() {
+        binding.btnMyCourse1.setOnClickListener(v -> {
             Intent intent = new Intent(ProfileActivity.this, CoursesListActivity.class);
             // Xóa ProfileActivity khỏi stack
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -32,6 +33,18 @@ public class ProfileActivity extends AppCompatActivity {
             overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         });
     }
+
+    private void CourseNavigation2() {
+        binding.btnMyCourse2.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, CoursesListActivity.class);
+            // Xóa ProfileActivity khỏi stack
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            // Áp dụng hiệu ứng mượt giống như nút Back
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        });
+    }
+
     private void MainNavigation() {
         binding.btnHome.setOnClickListener(v -> {
             Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
