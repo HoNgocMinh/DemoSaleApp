@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void statusBarColor() {
         Window window=MainActivity.this.getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(MainActivity.this,R.color.purple_Dark));
+        window.setStatusBarColor(ContextCompat.getColor(MainActivity.this,R.color.dark_blue));
     }
 
     private void initRecyclerView() {

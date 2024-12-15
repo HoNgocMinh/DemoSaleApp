@@ -55,6 +55,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:paddingTop="10dp"
                 android:id="@+id/cartView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
@@ -193,12 +194,15 @@
                 android:text="Phương thức thanh toán"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                android:focusable="true"
                 android:textStyle="bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btn_paymentMethod"
                 android:layout_width="match_parent"
                 android:layout_height="84dp"
+                android:clickable="true"
+                android:focusable="true"
                 android:background="@drawable/grey_background">
 
                 <TextView
@@ -223,10 +227,11 @@
 
                 <TextView
                     android:id="@+id/txt_Payment"
+                    android:clickable="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Tiền mặt"
+                    android:text="Momo"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -248,7 +253,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button2"
+                android:id="@+id/btnThanhToan"
                 style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project167.Adapter.CoursesAdapter;
+import com.example.project167.databinding.ActivityCartBinding;
+import com.example.project167.databinding.ActivityCoursesPopularListBinding;
 import com.example.project167.domain.CoursesDomain;
 import com.example.project167.R;
 
@@ -18,14 +20,18 @@ import java.util.ArrayList;
 public class CoursesPopularListActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapterCourceList;
     private RecyclerView recyclerViewCourse;
+    ActivityCoursesPopularListBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses_popular_list);
+        binding = ActivityCoursesPopularListBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         statusBarColor();
         initRecyclerView();
+        setVariable();
     }
     private void statusBarColor() {
         Window window= CoursesPopularListActivity.this.getWindow();
@@ -47,4 +53,8 @@ public class CoursesPopularListActivity extends AppCompatActivity {
         adapterCourceList = new CoursesAdapter(items);
         recyclerViewCourse.setAdapter(adapterCourceList);
     }
+    private void setVariable() {
+        binding.backbtn.setOnClickListener(v -> finish());
+    }
+
 }

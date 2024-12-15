@@ -3,9 +3,11 @@ package com.example.project167.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityProfileBinding;
@@ -19,6 +21,7 @@ public class ProfileAdminActivity extends AppCompatActivity {
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         LogoutNavigation();
+        statusBarColor();
     }
 
     private void LogoutNavigation() {
@@ -37,5 +40,10 @@ public class ProfileAdminActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+    }
+    //chỉnh màu thanh trạng thái
+    private void statusBarColor() {
+        Window window=ProfileAdminActivity.this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(ProfileAdminActivity.this,R.color.lightGrey));
     }
 }

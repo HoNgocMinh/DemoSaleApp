@@ -50,7 +50,7 @@ public class DetailActivity extends AppCompatActivity {
         binding.ratingTxt.setText(object.getScore() + "");
 
         binding.addToCardBtn.setOnClickListener(v -> {
-            object.setNumberInCart(numberOrder);
+            //object.setNumberInCart(numberOrder);
             managmentCart.insertFood(object);
         });
 

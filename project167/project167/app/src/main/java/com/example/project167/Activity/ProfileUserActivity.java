@@ -1,11 +1,15 @@
 package com.example.project167.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.Toast;
 
+import com.example.project167.R;
 import com.example.project167.databinding.ActivityProfileBinding;
 
 public class ProfileUserActivity extends AppCompatActivity {
@@ -21,6 +25,7 @@ public class ProfileUserActivity extends AppCompatActivity {
         MainNavigation();
         CourseNavigation();
         LogoutNavigation();
+        statusBarColor();
     }
 
     private void CourseNavigation() {
@@ -61,5 +66,10 @@ public class ProfileUserActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+    }
+    //chỉnh màu thanh trạng thái
+    private void statusBarColor() {
+        Window window=ProfileUserActivity.this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(ProfileUserActivity.this, R.color.lightGrey));
     }
 }
