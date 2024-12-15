@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
             if (isLoggedIn) {
                 // Nếu đã đăng nhập, chuyển đến màn hình Profile
                 Intent intent = new Intent(MainActivity.this, CartActivity.class);
-                // test
-                intent.putExtra("fromCart", true);
                 startActivity(intent);
             } else {
                 Toast.makeText(MainActivity.this, "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, LoginUserActivity.class);
+                // test
+                intent.putExtra("fromCart", true);
                 startActivity(intent);
             }
         });

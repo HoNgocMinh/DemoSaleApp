@@ -83,8 +83,9 @@ public class LoginUserActivity extends AppCompatActivity {
 
             // Kiểm tra nếu người dùng đến từ Giỏ hàng
             Intent intent;
+            boolean fromCart = getIntent().getBooleanExtra("fromCart", false);
             // Logic từ giỏ hàng về lại giỏ hàng sau đăng nhập
-            if (getIntent().getBooleanExtra("fromCart", true)) {
+            if (fromCart) {
                 // Nếu đến từ giỏ hàng, chuyển về lại giỏ hàng
                 intent = new Intent(LoginUserActivity.this, CartActivity.class);
             } else {

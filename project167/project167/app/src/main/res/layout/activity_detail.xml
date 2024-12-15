@@ -8,7 +8,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,9 +38,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:src="@drawable/bookmark"
-                    app:layout_constraintBottom_toBottomOf="@+id/btn_back"
+                    app:layout_constraintBottom_toBottomOf="@+id/backBtn"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/btn_back" />
+                    app:layout_constraintTop_toTopOf="@+id/backBtn" />
 
                 <ImageView
                     android:id="@+id/imageView9"
@@ -62,7 +64,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_back" />
+                    app:layout_constraintTop_toBottomOf="@+id/backBtn" />
 
                 <ImageView
                     android:id="@+id/itemPic"
@@ -88,8 +90,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
-                    android:text="Tên khóa học"
                     android:singleLine="true"
+                    android:text="Tên khóa học"
                     android:textColor="@color/black"
                     android:textSize="23sp"
                     android:textStyle="bold" />
@@ -116,8 +118,8 @@
                     android:id="@+id/imageView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:src="@drawable/star" />
+                    android:src="@drawable/star"
+                    app:tint="@color/dark_blue" />
 
                 <TextView
                     android:id="@+id/ratingTxt"
@@ -125,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="4.0"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dark_blue"
                     android:textStyle="bold" />
 
                 <TextView
@@ -141,7 +143,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:src="@drawable/review" />
+                    android:src="@drawable/review"
+                    app:tint="@color/dark_blue" />
 
                 <TextView
                     android:id="@+id/reviewTxt"
@@ -149,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="10"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dark_blue"
                     android:textStyle="bold" />
 
                 <TextView
@@ -176,23 +179,38 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="description"
-                android:textSize="16sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/addToCardBtn"
-               android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="32dp"
                 style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
-                android:background="@drawable/btn_background"
-                android:textColor="@color/white"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/btn_background"
                 android:text="Thêm vào giỏ hàng"
-                android:textStyle="bold"
-                android:textSize="16sp"/>
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_toCart"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/btn_line"
+                android:text="Xem giỏ hàng"
+                android:textColor="@color/dark_blue"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
