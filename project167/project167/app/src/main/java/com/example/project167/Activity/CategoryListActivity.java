@@ -21,7 +21,7 @@ public class CategoryListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_courses_popular_list);
+        setContentView(R.layout.activity_category_list);
 
         statusBarColor();
         initRecyclerView();

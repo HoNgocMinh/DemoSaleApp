@@ -31,13 +31,18 @@ public class MainActivity extends AppCompatActivity {
          statusBarColor();
          initRecyclerView();
          CartNavigation();
-//       CourseNavigation(); (Điều hướng sang trang mới)
+         //CourseNavigation(); (Điều hướng sang trang khóa học)
          ProfileNavigation();
          SeeMoreCourseNavigation();
+         SeeMoreCategoryNavigation();
     }
 
     private void SeeMoreCourseNavigation(){
         binding.btnSeeMorePopularCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesPopularListActivity.class)));
+    }
+
+    private void SeeMoreCategoryNavigation(){
+        binding.btnSeeAllCategory.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CategoryListActivity.class)));
     }
 
     private void CartNavigation() {

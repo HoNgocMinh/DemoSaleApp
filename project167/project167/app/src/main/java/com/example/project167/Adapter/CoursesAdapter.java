@@ -36,7 +36,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.Viewhold
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         holder.title.setText(items.get(position).getTitle());
-        holder.price.setText("$"+items.get(position).getPrice());
+        holder.price.setText("$" + items.get(position).getPrice());
 
 
         int drawableResourceId=holder.itemView.getResources()
