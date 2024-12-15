@@ -80,7 +80,19 @@ public class LoginUserActivity extends AppCompatActivity {
             editor.apply();
 
             Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-            MainNavigation();
+
+            // Kiểm tra nếu người dùng đến từ Giỏ hàng
+            Intent intent;
+            // Logic từ giỏ hàng về lại giỏ hàng sau đăng nhập
+            if (getIntent().getBooleanExtra("fromCart", true)) {
+                // Nếu đến từ giỏ hàng, chuyển về lại giỏ hàng
+                intent = new Intent(LoginUserActivity.this, CartActivity.class);
+            } else {
+                // Nếu không, chuyển đến MainActivity
+                intent = new Intent(LoginUserActivity.this, MainActivity.class);
+            }
+            startActivity(intent);
+            finish();
         } else {
             Toast.makeText(this, "Tên đăng nhập hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
         }
