@@ -36,7 +36,7 @@ public class LoginUserActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
         if (isLoggedIn) {
-            navigateToMain();
+            MainNavigation();
         }
 
         // Xử lý sự kiện nút Đăng nhập
@@ -80,13 +80,13 @@ public class LoginUserActivity extends AppCompatActivity {
             editor.apply();
 
             Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-            navigateToMain();
+            MainNavigation();
         } else {
             Toast.makeText(this, "Tên đăng nhập hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void navigateToMain() {
+    private void MainNavigation() {
         Intent intent = new Intent(LoginUserActivity.this, MainActivity.class);
         startActivity(intent);
         finish();

@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.example.project167.Adapter.PopularAdapter;
 import com.example.project167.R;
@@ -40,11 +41,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void CartNavigation() {
-        binding.btnCart.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
+        binding.btnCart.setOnClickListener(v -> {
+            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+            if (isLoggedIn) {
+                // Nếu đã đăng nhập, chuyển đến màn hình Profile
+                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(MainActivity.this, "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, LoginUserActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
+    // Điều hướng đến khóa học
 //    private void CourseNavigation() {
 //        binding.currentCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesListActivity.class)));
 //    }
+
     private void ProfileNavigation() {
         binding.btnMyProfile.setOnClickListener(v -> {
             // Lấy trạng thái đăng nhập từ SharedPreferences
@@ -56,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, ProfileUserActivity.class);
                 startActivity(intent);
             } else {
+                Toast.makeText(MainActivity.this, "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, LoginUserActivity.class);
                 startActivity(intent);
             }
