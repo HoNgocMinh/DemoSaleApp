@@ -1,7 +1,6 @@
 package com.example.project167.Activity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 
 
@@ -16,21 +15,21 @@ import com.example.project167.R;
 
 import java.util.ArrayList;
 
-public class CoursesListActivity extends AppCompatActivity {
+public class CoursesPopularListActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapterCourceList;
     private RecyclerView recyclerViewCourse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_courses_list);
+        setContentView(R.layout.activity_courses_popular_list);
 
         statusBarColor();
         initRecyclerView();
     }
     private void statusBarColor() {
-        Window window=CoursesListActivity.this.getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(CoursesListActivity.this,R.color.white));
+        Window window= CoursesPopularListActivity.this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(CoursesPopularListActivity.this,R.color.white));
     }
     private void initRecyclerView() {
         ArrayList<CoursesDomain> items = new ArrayList<>();

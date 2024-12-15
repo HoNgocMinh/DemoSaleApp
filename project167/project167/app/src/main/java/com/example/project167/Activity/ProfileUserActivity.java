@@ -25,7 +25,7 @@ public class ProfileUserActivity extends AppCompatActivity {
 
     private void CourseNavigation() {
         binding.btnCourse.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileUserActivity.this, CoursesListActivity.class);
+            Intent intent = new Intent(ProfileUserActivity.this, CoursesPopularListActivity.class);
             // Xóa ProfileActivity khỏi stack
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);

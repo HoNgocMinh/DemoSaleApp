@@ -42,7 +42,10 @@
             android:exported="false"/>
 
         <!--MainActivity-->
-        <activity android:name=".Activity.CoursesListActivity"
+        <activity android:name=".Activity.CoursesPopularListActivity"
+            android:exported="false"/>
+
+        <activity android:name=".Activity.CategoryListActivity"
             android:exported="false"/>
 
         <activity android:name=".Activity.ProfileUserActivity"

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void SeeMoreCourseNavigation(){
-        binding.btnSeeMorePopularCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesListActivity.class)));
+        binding.btnSeeMorePopularCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesPopularListActivity.class)));
     }
 
     private void CartNavigation() {
