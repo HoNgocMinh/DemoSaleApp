@@ -49,9 +49,9 @@ public class SaleCourse extends SQLiteOpenHelper {
             COURSE_NAME + " TEXT NOT NULL, " +
             COURSE_PRICE + " INTEGER NOT NULL, " +
             COURSE_PICTURE + " TEXT NOT NULL, " +
-            COURSE_SCORE + " REAL NOT NULL DEFAULT 0.0, " + // Sửa lỗi thiếu khoảng trắng
-            COURSE_COUNT_REVIEW + " INTEGER NOT NULL DEFAULT 0, " + // Sửa INTERGER thành INTEGER
-            COURSE_DESCRIPTION + " TEXT NOT NULL, " + // Sửa lỗi thiếu khoảng trắng
+            COURSE_SCORE + " REAL NOT NULL DEFAULT 0.0, " +
+            COURSE_COUNT_REVIEW + " INTEGER NOT NULL DEFAULT 0, " +
+            COURSE_DESCRIPTION + " TEXT NOT NULL, " +
             "category_id INTEGER, " +
             "FOREIGN KEY(category_id) REFERENCES " + CATEGORIES + "(" + CATEGORY_ID + ") ON DELETE SET NULL);";
 

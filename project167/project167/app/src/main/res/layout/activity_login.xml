@@ -150,7 +150,7 @@
                 android:id="@+id/btn_loginGoogle"
                 android:layout_width="308dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="16dp"
+                android:paddingStart="100dp"
                 android:layout_weight="0.5"
                 android:background="@drawable/social_btn_background"
                 android:orientation="horizontal">
