@@ -10,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class SaleCourse extends SQLiteOpenHelper {
-
-    private final ContentValues values = new ContentValues();
     private static final String DATABASE_NAME = "SaleCourse.db";  // Tên cơ sở dữ liệu
     private static final int DATABASE_VERSION = 1; // Phiên bản hiện tại
 
@@ -21,12 +19,6 @@ public class SaleCourse extends SQLiteOpenHelper {
     public static final String CATEGORY_NAME = "category_name";
     public static final String CATEGORY_PICTURE = "category_picPath";
 
-    // Câu lệnh tạo bảng category
-    private static final String CREATE_TABLE_CATEGORIES = "CREATE TABLE " + CATEGORIES + " (" +
-            CATEGORY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            CATEGORY_NAME + " TEXT, " +
-            CATEGORY_PICTURE + " TEXT);";
-
     //Table và column của course
     public static final String COURSES = "courses";
     public static final String COURSE_ID = "course_id";
@@ -34,14 +26,37 @@ public class SaleCourse extends SQLiteOpenHelper {
     public static final String COURSE_PRICE = "course_price";
     public static final String COURSE_PICTURE = "course_picPath";
 
-    // Cập nhật câu lệnh tạo bảng courses để thêm cột category_id
+    // Table và column của reviews
+    public static final String REVIEWS = "reviews";
+    public static final String REVIEW_ID = "review_id";
+    public static final String REVIEW_COURSE_ID = "course_id";
+    public static final String REVIEW_USER_NAME = "user_name";
+    public static final String REVIEW_RATING = "rating";
+    public static final String REVIEW_COMMENT = "comment";
+
+    // Câu lệnh tạo bảng category
+    private static final String CREATE_TABLE_CATEGORIES = "CREATE TABLE " + CATEGORIES + " (" +
+            CATEGORY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            CATEGORY_NAME + " TEXT NOT NULL , " +
+            CATEGORY_PICTURE + " TEXT NOT NULL);";
+
+    // Câu lệnh tạo bảng course
     private static final String CREATE_TABLE_COURSES = "CREATE TABLE " + COURSES + " (" +
             COURSE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            COURSE_NAME + " TEXT, " +
-            COURSE_PRICE + " INTEGER, " +
-            COURSE_PICTURE + " TEXT, " +
+            COURSE_NAME + " TEXT NOT NULL, " +
+            COURSE_PRICE + " INTEGER NOT NULL, " +
+            COURSE_PICTURE + " TEXT NOT NULL, " +
             "category_id INTEGER, " +
-            "FOREIGN KEY(" + "category_id" + ") REFERENCES " + CATEGORIES + "(" + CATEGORY_ID + "));";
+            "FOREIGN KEY(category_id) REFERENCES " + CATEGORIES + "(" + CATEGORY_ID + ") ON DELETE SET NULL);";
+
+    // Câu lệnh tạo bảng reviews
+    private static final String CREATE_TABLE_REVIEWS = "CREATE TABLE reviews (" +
+            "review_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "course_id INTEGER NOT NULL, " +
+            "user_name TEXT NOT NULL, " +
+            "rating INTEGER CHECK(rating >= 1 AND rating <= 5), " +
+            "comment TEXT, " +
+            "FOREIGN KEY(course_id) REFERENCES courses(course_id) ON DELETE CASCADE);"; // Xóa khóa học sẽ xóa review liên quan
 
     public SaleCourse(@Nullable Context context) {
         super(context, "SaleCourse", null, DATABASE_VERSION);
@@ -49,30 +64,37 @@ public class SaleCourse extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Tạo bảng categories
-        db.execSQL(CREATE_TABLE_CATEGORIES);
+        // Tạo bảng reviews
+        db.execSQL(CREATE_TABLE_REVIEWS);
 
         // Tạo bảng khóa học
         db.execSQL(CREATE_TABLE_COURSES);
+
+        // Tạo bảng categories
+        db.execSQL(CREATE_TABLE_CATEGORIES);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //Xóa bảng nếu tồn tại trước đó
+        db.execSQL("DROP TABLE IF EXISTS " + CATEGORIES);
         db.execSQL("DROP TABLE IF EXISTS " + COURSES);
         db.execSQL("DROP TABLE IF EXISTS " + CATEGORIES);
 
-        //Tạo lại bảng với versionn mới
+        //Tạo lại bảng với version mới
         onCreate(db);
     }
 
-    public void BasicCategory(@NonNull SQLiteDatabase db){
+    public void BasicCategory(SQLiteDatabase db){
 
-        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + COURSES, null);
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + CATEGORIES, null);
         if (cursor != null && cursor.moveToFirst()) {
             int count = cursor.getInt(0);
             cursor.close();
             if(count == 0){
+
+                ContentValues values = new ContentValues();
+
                 values.put(CATEGORY_NAME, "Nấu ăn");
                 values.put(CATEGORY_PICTURE, "cat1");
                 db.insert(CATEGORIES, null, values);
@@ -96,7 +118,7 @@ public class SaleCourse extends SQLiteOpenHelper {
         }
     }
 
-    public void BasicCourse(@NonNull SQLiteDatabase db){
+    public void BasicCourse(SQLiteDatabase db){
 
         Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + COURSES, null);
         if (cursor != null && cursor.moveToFirst()) {
@@ -104,6 +126,9 @@ public class SaleCourse extends SQLiteOpenHelper {
             cursor.close();
 
             if(count == 0){
+
+                ContentValues values = new ContentValues();
+
                 values.put(COURSE_NAME, "Kỹ thuật nấu ăn cơ bản");
                 values.put(COURSE_PRICE, 150);
                 values.put(COURSE_PICTURE, "ic_1");
@@ -129,5 +154,11 @@ public class SaleCourse extends SQLiteOpenHelper {
     public Cursor getAllCourses() {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + COURSES, null);
+    }
+
+    // Lấy tất cả danh mục từ cơ sở dữ liệu
+    public Cursor getAllCategory(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + CATEGORIES, null);
     }
 }

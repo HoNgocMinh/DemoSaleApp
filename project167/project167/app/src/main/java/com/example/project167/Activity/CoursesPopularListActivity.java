@@ -37,7 +37,9 @@ public class CoursesPopularListActivity extends AppCompatActivity {
         // Khởi tạo đối tượng SaleCourse
         dbHelper = new SaleCourse(this);
 
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        //Fix tối ưu viết lệnh
+        SQLiteDatabase db = this.dbHelper.getReadableDatabase();
+        dbHelper.BasicCategory(db);
         dbHelper.BasicCourse(db);
 
         initRecyclerView();
