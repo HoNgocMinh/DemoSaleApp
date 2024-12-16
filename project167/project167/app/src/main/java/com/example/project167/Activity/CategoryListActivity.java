@@ -12,17 +12,17 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project167.Adapter.CoursesAdapter;
+import com.example.project167.Adapter.CategoryAdapter;
 import com.example.project167.Database.SaleCourse;
 import com.example.project167.R;
-import com.example.project167.domain.CoursesDomain;
+import com.example.project167.domain.CategoryDomain;
 
 import java.util.ArrayList;
 
 public class CategoryListActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapterCategoryList;
     private RecyclerView recyclerViewCategory;
-    private SaleCourse dbHelper; // Đối tượng SaleCourse để kết nối cơ sở dữ liệu
+    private SaleCourse dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class CategoryListActivity extends AppCompatActivity {
         dbHelper = new SaleCourse(this);
         SQLiteDatabase db = this.dbHelper.getReadableDatabase();
         dbHelper.BasicCategory(db);
+
         // Khởi tạo RecyclerView
         initRecyclerView();
     }
@@ -46,18 +47,18 @@ public class CategoryListActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         // Lấy dữ liệu từ cơ sở dữ liệu
-        ArrayList<CoursesDomain> items = getCategoriesFromDatabase();
+        ArrayList<CategoryDomain> items = getCategoriesFromDatabase();
 
         recyclerViewCategory = findViewById(R.id.view);
         recyclerViewCategory.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         // Tạo adapter và thiết lập cho RecyclerView
-        adapterCategoryList = new CoursesAdapter(items);
+        adapterCategoryList = new CategoryAdapter(items);
         recyclerViewCategory.setAdapter(adapterCategoryList);
     }
 
-    private ArrayList<CoursesDomain> getCategoriesFromDatabase() {
-        ArrayList<CoursesDomain> categories = new ArrayList<>();
+    private ArrayList<CategoryDomain> getCategoriesFromDatabase() {
+        ArrayList<CategoryDomain> categories = new ArrayList<>();
 
         // Lấy cơ sở dữ liệu ở chế độ chỉ đọc
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -71,15 +72,15 @@ public class CategoryListActivity extends AppCompatActivity {
                 do {
                     // Lấy chỉ mục cột
                     int nameIndex = cursor.getColumnIndex(SaleCourse.CATEGORY_NAME);
-                    int iconIndex = cursor.getColumnIndex(SaleCourse.CATEGORY_PICTURE);
+                    int pictureIndex = cursor.getColumnIndex(SaleCourse.CATEGORY_PICTURE);
 
-                    if (nameIndex >= 0 && iconIndex >= 0) {
+                    if (nameIndex >= 0 && pictureIndex >= 0) {
                         // Lấy dữ liệu từ cursor
                         String name = cursor.getString(nameIndex);
-                        String iconPath = cursor.getString(iconIndex);
+                        String picPath = cursor.getString(pictureIndex);
 
                         // Thêm vào danh sách danh mục
-                        categories.add(new CoursesDomain(name, 0, iconPath));
+                        categories.add(new CategoryDomain(name, picPath));
                     } else {
                         Log.e("CategoryListActivity", "Column index is invalid!");
                     }
