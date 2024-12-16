@@ -40,14 +40,16 @@ public class ProfileUserActivity extends AppCompatActivity {
     }
 
     private void MainNavigation() {
-        binding.btnHome.setOnClickListener(v -> {
-            Intent intent = new Intent(ProfileUserActivity.this, MainActivity.class);
-            //
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-            //
-            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-        });
+        // Chức năng trở về Trang Chủ
+//        binding.btnHome.setOnClickListener(v -> {
+//            Intent intent = new Intent(ProfileUserActivity.this, MainActivity.class);
+//            //
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//            startActivity(intent);
+//            //
+//            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+//        });
+        binding.btnHome.setOnClickListener(v -> finish());
     }
 
     private void LogoutNavigation() {

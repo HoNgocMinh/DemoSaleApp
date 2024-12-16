@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project167.Adapter.CategoryAdapter;
+import com.example.project167.databinding.ActivityCategoryListBinding;
 import com.example.project167.Database.SaleCourse;
 import com.example.project167.R;
 import com.example.project167.domain.CategoryDomain;
@@ -23,6 +24,8 @@ public class CategoryListActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapterCategoryList;
     private RecyclerView recyclerViewCategory;
     private SaleCourse dbHelper;
+
+    private ActivityCategoryListBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +39,14 @@ public class CategoryListActivity extends AppCompatActivity {
         SQLiteDatabase db = this.dbHelper.getReadableDatabase();
         dbHelper.BasicCategory(db);
 
+        //
+        binding = ActivityCategoryListBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         // Khởi tạo RecyclerView
         initRecyclerView();
+
+        setVariable();
     }
 
     private void statusBarColor() {
@@ -98,5 +107,9 @@ public class CategoryListActivity extends AppCompatActivity {
         }
 
         return categories;
+    }
+
+    private void setVariable() {
+        binding.returnbtn.setOnClickListener(v -> finish());
     }
 }
