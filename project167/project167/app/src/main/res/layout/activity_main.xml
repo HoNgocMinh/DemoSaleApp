@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MainActivity">
+    tools:context=".Activity.MainActivity"
+    android:background="#F2F2F2">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -107,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="16dp">
 
@@ -156,7 +157,7 @@
                 android:layout_marginStart="24dp"
                 android:text="Danh mục"
                 android:textColor="@color/dark_blue"
-                android:textSize="19sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -164,6 +165,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
+                android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -292,7 +294,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="22dp"
                 android:layout_marginEnd="24dp"
                 android:orientation="horizontal">
 
@@ -303,8 +305,7 @@
                     android:layout_weight="1"
                     android:text="Khóa học phổ biến"
                     android:textColor="@color/dark_blue"
-                    android:textSize="19sp"
-
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -320,6 +321,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
+                android:layout_marginTop="12dp"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp" />
         </LinearLayout>

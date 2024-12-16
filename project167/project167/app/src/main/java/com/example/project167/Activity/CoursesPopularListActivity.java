@@ -9,13 +9,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project167.Adapter.CoursesAdapter;
+import com.example.project167.Adapter.PopularAdapter;
 import com.example.project167.Database.SaleCourse;
 import com.example.project167.databinding.ActivityCoursesPopularListBinding;
 import com.example.project167.domain.CoursesDomain;
+import com.example.project167.domain.PopularDomain;
 import com.example.project167.R;
 
 import java.util.ArrayList;
@@ -53,18 +56,22 @@ public class CoursesPopularListActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         // Lấy dữ liệu từ cơ sở dữ liệu
-        ArrayList<CoursesDomain> items = getCoursesFromDatabase();
+        ArrayList<PopularDomain> items = getCoursesFromDatabase();
 
         recyclerViewCourse = findViewById(R.id.view);
-        recyclerViewCourse.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
 
+        recyclerViewCourse.setLayoutManager(gridLayoutManager);
+
+        //binding.PopularView.setLayoutManager(gridLayoutManager);
+        //binding.PopularView.setAdapter(new PopularAdapter(items));
         // Tạo adapter và thiết lập cho RecyclerView
-        adapterCourceList = new CoursesAdapter(items);
+        adapterCourceList = new PopularAdapter(items);
         recyclerViewCourse.setAdapter(adapterCourceList);
     }
 
-    private ArrayList<CoursesDomain> getCoursesFromDatabase() {
-        ArrayList<CoursesDomain> courses = new ArrayList<>();
+    private ArrayList<PopularDomain> getCoursesFromDatabase() {
+        ArrayList<PopularDomain> courses = new ArrayList<>();
         Cursor cursor = dbHelper.getAllCourses();  // Truy vấn tất cả các khóa học từ cơ sở dữ liệu
 
         // Kiểm tra nếu cursor không null và di chuyển tới dòng đầu tiên
@@ -83,7 +90,10 @@ public class CoursesPopularListActivity extends AppCompatActivity {
                     String picPath = cursor.getString(picPathIndex);
 
                     // Tạo đối tượng CoursesDomain và thêm vào danh sách
-                    courses.add(new CoursesDomain(title, price, picPath));
+                    courses.add(new PopularDomain(title, picPath, 4, '7', price,"aaaa"));
+                    courses.add(new PopularDomain(title, picPath, 63, '6', price,"dfghh"));
+                    courses.add(new PopularDomain(title, picPath, 4, '7', price,"aaaa"));
+                    courses.add(new PopularDomain(title, picPath, 4, '7', price,"aaaa"));
                 } else {
                     // Nếu một trong các cột không tồn tại, bạn có thể xử lý lỗi ở đây
                     Log.e("CoursesPopularListActivity", "Column index is invalid!");

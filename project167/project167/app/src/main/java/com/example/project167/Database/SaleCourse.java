@@ -114,6 +114,10 @@ public class SaleCourse extends SQLiteOpenHelper {
                 values.put(CATEGORY_NAME, "Lập trình");
                 values.put(CATEGORY_PICTURE, "cat5");
                 db.insert(CATEGORIES, null, values);
+
+                values.put(CATEGORY_NAME, "Nấu gà");
+                values.put(CATEGORY_PICTURE, "cat1");
+                db.insert(CATEGORIES, null, values);
             }
         }
     }
