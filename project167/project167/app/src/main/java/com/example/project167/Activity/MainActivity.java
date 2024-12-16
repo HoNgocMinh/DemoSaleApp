@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
      //Điều hướng đến khóa học
     private void CourseNavigation() {
-        binding.currentCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CategoryListActivity.class)));
+        binding.currentCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesPopularListActivity.class)));
     }
 
     private void ProfileNavigation() {

@@ -90,10 +90,8 @@ public class CoursesPopularListActivity extends AppCompatActivity {
                     String picPath = cursor.getString(picPathIndex);
 
                     // Tạo đối tượng CoursesDomain và thêm vào danh sách
-                    courses.add(new PopularDomain(title, picPath, 4, '7', price,"aaaa"));
-                    courses.add(new PopularDomain(title, picPath, 63, '6', price,"dfghh"));
-                    courses.add(new PopularDomain(title, picPath, 4, '7', price,"aaaa"));
-                    courses.add(new PopularDomain(title, picPath, 4, '7', price,"aaaa"));
+                    courses.add(new PopularDomain(title, picPath, 3, 2, price,"Học cùng thầy bẻo"));
+                    courses.add(new PopularDomain(title, picPath, 0, 5, price,"Học cùng thầy bẻo"));
                 } else {
                     // Nếu một trong các cột không tồn tại, bạn có thể xử lý lỗi ở đây
                     Log.e("CoursesPopularListActivity", "Column index is invalid!");

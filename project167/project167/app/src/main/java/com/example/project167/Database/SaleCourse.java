@@ -25,6 +25,9 @@ public class SaleCourse extends SQLiteOpenHelper {
     public static final String COURSE_NAME = "course_name";
     public static final String COURSE_PRICE = "course_price";
     public static final String COURSE_PICTURE = "course_picPath";
+    public static final String COURSE_SCORE = "course_score";
+    public static final String COURSE_COUNT_REVIEW = "course_count_review";
+    public static final String COURSE_DESCRIPTION = "course_description";
 
     // Table và column của reviews
     public static final String REVIEWS = "reviews";
@@ -46,8 +49,12 @@ public class SaleCourse extends SQLiteOpenHelper {
             COURSE_NAME + " TEXT NOT NULL, " +
             COURSE_PRICE + " INTEGER NOT NULL, " +
             COURSE_PICTURE + " TEXT NOT NULL, " +
+            COURSE_SCORE + " REAL NOT NULL DEFAULT 0.0, " + // Sửa lỗi thiếu khoảng trắng
+            COURSE_COUNT_REVIEW + " INTEGER NOT NULL DEFAULT 0, " + // Sửa INTERGER thành INTEGER
+            COURSE_DESCRIPTION + " TEXT NOT NULL, " + // Sửa lỗi thiếu khoảng trắng
             "category_id INTEGER, " +
             "FOREIGN KEY(category_id) REFERENCES " + CATEGORIES + "(" + CATEGORY_ID + ") ON DELETE SET NULL);";
+
 
     // Câu lệnh tạo bảng reviews
     private static final String CREATE_TABLE_REVIEWS = "CREATE TABLE reviews (" +
@@ -64,20 +71,21 @@ public class SaleCourse extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Tạo bảng reviews
-        db.execSQL(CREATE_TABLE_REVIEWS);
+        // Tạo bảng categories
+        db.execSQL(CREATE_TABLE_CATEGORIES);
 
         // Tạo bảng khóa học
         db.execSQL(CREATE_TABLE_COURSES);
 
-        // Tạo bảng categories
-        db.execSQL(CREATE_TABLE_CATEGORIES);
+        // Tạo bảng reviews
+        db.execSQL(CREATE_TABLE_REVIEWS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
         //Xóa bảng nếu tồn tại trước đó
-        db.execSQL("DROP TABLE IF EXISTS " + CATEGORIES);
+        db.execSQL("DROP TABLE IF EXISTS " + REVIEWS);
         db.execSQL("DROP TABLE IF EXISTS " + COURSES);
         db.execSQL("DROP TABLE IF EXISTS " + CATEGORIES);
 
@@ -114,10 +122,6 @@ public class SaleCourse extends SQLiteOpenHelper {
                 values.put(CATEGORY_NAME, "Lập trình");
                 values.put(CATEGORY_PICTURE, "cat5");
                 db.insert(CATEGORIES, null, values);
-
-                values.put(CATEGORY_NAME, "Nấu gà");
-                values.put(CATEGORY_PICTURE, "cat1");
-                db.insert(CATEGORIES, null, values);
             }
         }
     }
@@ -136,18 +140,27 @@ public class SaleCourse extends SQLiteOpenHelper {
                 values.put(COURSE_NAME, "Kỹ thuật nấu ăn cơ bản");
                 values.put(COURSE_PRICE, 150);
                 values.put(COURSE_PICTURE, "ic_1");
+                values.put(COURSE_SCORE, 1.0);
+                values.put(COURSE_COUNT_REVIEW,1);
+                values.put(COURSE_DESCRIPTION,"Học cùng thầy BẺO");
                 values.put("category_id", 1);
                 db.insert(COURSES, null, values);
 
-                values.put(COURSE_NAME, "Lập trình trên thiết bị di động");
+                values.put(COURSE_NAME, "Lập trình Mobile");
                 values.put(COURSE_PRICE, 69);
                 values.put(COURSE_PICTURE, "ic_2");
+                values.put(COURSE_SCORE, 2.0);
+                values.put(COURSE_COUNT_REVIEW,2);
+                values.put(COURSE_DESCRIPTION,"Học cùng cô Y");
                 values.put("category_id",5);
                 db.insert(COURSES, null, values);
 
                 values.put(COURSE_NAME, "Thiết kế nội thất");
                 values.put(COURSE_PRICE, 150);
                 values.put(COURSE_PICTURE, "ic_3");
+                values.put(COURSE_SCORE, 3.0);
+                values.put(COURSE_COUNT_REVIEW,3);
+                values.put(COURSE_DESCRIPTION,"Học cùng thầy X");
                 values.put("category_id",2);
                 db.insert(COURSES, null, values);
             }
