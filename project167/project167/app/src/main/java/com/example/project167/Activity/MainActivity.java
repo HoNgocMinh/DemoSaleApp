@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
          statusBarColor();
          initRecyclerView();
          CartNavigation();
-         //CourseNavigation(); (Điều hướng sang trang khóa học)
+         CourseNavigation(); // (Điều hướng sang trang danh mục trước)
          ProfileNavigation();
          SeeMoreCourseNavigation();
          SeeMoreCategoryNavigation();
@@ -64,10 +64,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Điều hướng đến khóa học
-//    private void CourseNavigation() {
-//        binding.currentCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesListActivity.class)));
-//    }
+     //Điều hướng đến khóa học
+    private void CourseNavigation() {
+        binding.currentCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CategoryListActivity.class)));
+    }
 
     private void ProfileNavigation() {
         binding.btnMyProfile.setOnClickListener(v -> {
