@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     private void SeeMoreCategoryNavigation(){
         binding.btnSeeAllCategory.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CategoryListActivity.class)));
     }
-    //Điều hướng đến khóa học
+
     private void CourseNavigation() {
         binding.currentCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesPopularListActivity.class)));
     }
@@ -82,20 +82,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void ProfileNavigation() {
         binding.btnMyProfile.setOnClickListener(v -> {
+
             // Lấy trạng thái đăng nhập
             FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
             if (currentUser == null) {
                 // Nếu người dùng chưa đăng nhập, chuyển về trang Login
                 Toast.makeText(MainActivity.this, "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, LoginUserActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(this, LoginUserActivity.class));
                 finish();
             }
             // Nếu đã đăng nhập, chuyển sang trang
             else {
-                Intent intent = new Intent(MainActivity.this, ProfileUserActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(MainActivity.this, ProfileUserActivity.class));
             }
         });
     }

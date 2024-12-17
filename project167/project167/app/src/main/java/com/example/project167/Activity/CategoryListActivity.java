@@ -80,16 +80,18 @@ public class CategoryListActivity extends AppCompatActivity {
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     // Lấy chỉ mục cột
+                    int idIndex = cursor.getColumnIndex(SaleCourse.CATEGORY_ID);
                     int nameIndex = cursor.getColumnIndex(SaleCourse.CATEGORY_NAME);
                     int pictureIndex = cursor.getColumnIndex(SaleCourse.CATEGORY_PICTURE);
 
                     if (nameIndex >= 0 && pictureIndex >= 0) {
                         // Lấy dữ liệu từ cursor
+                        int id = cursor.getInt(idIndex);
                         String name = cursor.getString(nameIndex);
                         String picPath = cursor.getString(pictureIndex);
 
                         // Thêm vào danh sách danh mục
-                        categories.add(new CategoryDomain(name, picPath));
+                        categories.add(new CategoryDomain(id,name, picPath));
                     } else {
                         Log.e("CategoryListActivity", "Column index is invalid!");
                     }

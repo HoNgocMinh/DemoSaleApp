@@ -178,4 +178,10 @@ public class SaleCourse extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + CATEGORIES, null);
     }
+
+    // Lấy khóa học có id của danh mục
+    public Cursor getCoursesByCategoryId(int categoryId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM courses WHERE category_id = ?", new String[]{String.valueOf(categoryId)});
+    }
 }
