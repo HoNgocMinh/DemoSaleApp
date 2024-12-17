@@ -96,9 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         ArrayList<PopularDomain> items=new ArrayList<>();
-        items.add(new PopularDomain("T-shirt black","item_1",15,4,500,"Immerse yourself"));
-        items.add(new PopularDomain("Smart Watch","item_2",10,4.5,450,"Immerse yourself"));
-        items.add(new PopularDomain("Phone","item_3",3,4.9,800,"Immerse yourself"));
+        items.add(new PopularDomain("lập trình web","ic_1",3,5,500,"Học cùng thầy X"));
+        items.add(new PopularDomain("Công nghệ phần mềm","ic_3",2,4.5,450,"Học cùng cô Y"));
+        items.add(new PopularDomain("Nấu ăn ngon mỗi ngày","ic_2",3,4.9,800,"Học cùng thầy Bẻo"));
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         //binding.PopularView.setLayoutManager(gridLayoutManager);

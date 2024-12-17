@@ -44,7 +44,7 @@ public class DetailActivity extends AppCompatActivity {
                 .into(binding.itemPic);
 
         binding.titleTxt.setText(object.getTitle());
-        binding.priceTxt.setText("$" + object.getPrice());
+        binding.priceTxt.setText("$" + object.getPrice()); // Test
         binding.descriptionTxt.setText(object.getDescription());
         binding.reviewTxt.setText(object.getReview() + "");
         binding.ratingTxt.setText(object.getScore() + "");

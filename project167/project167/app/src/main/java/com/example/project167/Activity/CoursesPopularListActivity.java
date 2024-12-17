@@ -81,6 +81,9 @@ public class CoursesPopularListActivity extends AppCompatActivity {
                 int titleIndex = cursor.getColumnIndex(SaleCourse.COURSE_NAME);
                 int priceIndex = cursor.getColumnIndex(SaleCourse.COURSE_PRICE);
                 int picPathIndex = cursor.getColumnIndex(SaleCourse.COURSE_PICTURE);
+                int reviewIndex = cursor.getColumnIndex(SaleCourse.COURSE_COUNT_REVIEW);
+                int descriptionIndex = cursor.getColumnIndex(SaleCourse.COURSE_DESCRIPTION);
+                int scoreIndex = cursor.getColumnIndex(SaleCourse.COURSE_SCORE);
 
                 // Nếu chỉ mục cột hợp lệ (>=0)
                 if (titleIndex >= 0 && priceIndex >= 0 && picPathIndex >= 0) {
@@ -88,10 +91,12 @@ public class CoursesPopularListActivity extends AppCompatActivity {
                     String title = cursor.getString(titleIndex);
                     int price = cursor.getInt(priceIndex);
                     String picPath = cursor.getString(picPathIndex);
+                    int count_review = Integer.parseInt(cursor.getString(reviewIndex));
+                    String description = cursor.getString(descriptionIndex);
+                    int score = Integer.parseInt(cursor.getString(scoreIndex));
 
                     // Tạo đối tượng CoursesDomain và thêm vào danh sách
-                    courses.add(new PopularDomain(title, picPath, 3, 2, price,"Học cùng thầy bẻo"));
-                    courses.add(new PopularDomain(title, picPath, 0, 5, price,"Học cùng thầy bẻo"));
+                    courses.add(new PopularDomain(title, picPath, count_review, score, price,description));
                 } else {
                     // Nếu một trong các cột không tồn tại, bạn có thể xử lý lỗi ở đây
                     Log.e("CoursesPopularListActivity", "Column index is invalid!");

@@ -3,13 +3,13 @@ package com.example.project167.domain;
 import java.io.Serializable;
 
 public class PopularDomain implements Serializable {
-    private String title;
-    private String picUrl;
-    private int review;
-    private double score;
+    private String title; //Tên khóa học
+    private String picUrl; //Đường dẫn ảnh khóa học
+    private int review; //Tổng số lượng comment trong khóa học
+    private double score; //Số điểm được đánh giá
     private int numberInCart;
-    private double price;
-    private String description;
+    private double price; //Giá khóa học
+    private String description; //Mô tả khóa học
 
     public PopularDomain(String title, String picUrl, int review, double score, double price,String description) {
         this.title = title;
