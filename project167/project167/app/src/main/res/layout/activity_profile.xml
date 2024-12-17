@@ -58,43 +58,19 @@
                     app:layout_constraintStart_toStartOf="@+id/txt_UserFullName"
                     app:layout_constraintTop_toBottomOf="@+id/txt_UserFullName" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/btn_verifyEmail"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="32dp"
-                    android:orientation="horizontal"
+                    android:text="Vui lòng xác thực tài khoản"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/red"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                    <LinearLayout
-                        android:id="@+id/numberOfCourse"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.3333"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txt_numberOfCourse"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="120"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/txt_Course"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="khóa đang học"
-                            android:textAlignment="center"
-                            android:textColor="@color/white" />
-                    </LinearLayout>
-                </LinearLayout>
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_UserRole"
+                    app:layout_constraintVertical_bias="0.345" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -40,12 +40,7 @@ public class LoginUserActivity extends AppCompatActivity {
         txtSignUp = findViewById(R.id.txt_signup);
         txtAdminLogin = findViewById(R.id.txt_AdminLogin);
 
-        // Kiểm tra trạng thái đăng nhập
-        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
-        if (isLoggedIn) {
-            MainNavigation();
-        }
+
 
         // Xử lý sự kiện chuyển sang màn hình đăng ký
         txtSignUp.setOnClickListener(v -> {
@@ -97,7 +92,6 @@ public class LoginUserActivity extends AppCompatActivity {
                             intent = new Intent(LoginUserActivity.this, MainActivity.class);
                         }
                         startActivity(intent);
-                        finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -110,9 +104,4 @@ public class LoginUserActivity extends AppCompatActivity {
 
     }
 
-    private void MainNavigation() {
-        Intent intent = new Intent(LoginUserActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
 }

@@ -8,20 +8,22 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityProfileBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class ProfileUserActivity extends AppCompatActivity {
     ActivityProfileBinding binding;
 
-    private FirebaseAuth firebaseAuth;
-    private TextView txtUserFullName;
-
+    FirebaseAuth firebaseAuth;
+    TextView txtUserFullName;
+    Button btn_verifyEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +53,30 @@ public class ProfileUserActivity extends AppCompatActivity {
                 txtUserFullName.setText("Tên người dùng chưa được cập nhật");
             }
         } else {
-            txtUserFullName.setText("Người dùng chưa đăng nhập");
+            txtUserFullName.setText("Khách");
         }
 
+        btn_verifyEmail = findViewById(R.id.btn_verifyEmail);
+
+        // xử lí xác thực email
+    if(!firebaseAuth.getCurrentUser().isEmailVerified()){
+        btn_verifyEmail.setVisibility(View.VISIBLE);
+    }
+    else {
+        btn_verifyEmail.setVisibility(View.GONE);
+    }
+    btn_verifyEmail.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //send verification email
+            firebaseAuth.getCurrentUser().sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(ProfileUserActivity.this, "Đã gửi mail xác thực.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    });
 
     }
 
@@ -69,15 +92,6 @@ public class ProfileUserActivity extends AppCompatActivity {
     }
 
     private void MainNavigation() {
-        // Chức năng trở về Trang Chủ
-//        binding.btnHome.setOnClickListener(v -> {
-//            Intent intent = new Intent(ProfileUserActivity.this, MainActivity.class);
-//            //
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//            startActivity(intent);
-//            //
-//            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-//        });
         binding.btnHome.setOnClickListener(v -> finish());
     }
 

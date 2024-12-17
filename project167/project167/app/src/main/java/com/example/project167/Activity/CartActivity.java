@@ -22,10 +22,11 @@ import com.example.project167.Helper.ManagmentCart;
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityCartBinding;
 
+import java.text.DecimalFormat;
+
 public class CartActivity extends AppCompatActivity {
     private ManagmentCart managmentCart;
     ActivityCartBinding binding;
-    double tax;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,14 @@ public class CartActivity extends AppCompatActivity {
 
 
     }
+    //format định dạng tiền
+    public static String formatCurrency(double amount) {
+        double scaledAmount = amount * 1000; // Nhân với 1000
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        return formatter.format(scaledAmount) + "đ";
+    }
+
+
     //chỉnh màu thanh trạng thái
     private void statusBarColor() {
         Window window=CartActivity.this.getWindow();
@@ -70,19 +79,19 @@ public class CartActivity extends AppCompatActivity {
         binding.cartView.setAdapter(new CartAdapter(managmentCart.getListCart(),this, () -> calculateCart()));
     }
 
-
+    //làm phép toán
     private void calculateCart() {
-        double percentTax = 0.02;
+        double percentTax = 0.08;
         double delivery = 10;
-        tax = Math.round(managmentCart.getTotalFee() * percentTax * 100.0) / 100.0;
 
-        double total = Math.round((managmentCart.getTotalFee() + tax + delivery) * 100) / 100;
-        double itemTotal = Math.round(managmentCart.getTotalFee() * 100) / 100;
+        double tamtinh = Math.round(managmentCart.getTotalFee());
+        double thanhtien = Math.round(tamtinh + tamtinh*percentTax + delivery);
 
-          binding.totalFeeTxt.setText("$" + itemTotal);
-          binding.taxTxt.setText("$" + tax);
-          binding.deliveryTxt.setText("$" + delivery);
-          binding.totalTxt.setText("$" + total);
+        binding.txtTamTinh.setText(formatCurrency(tamtinh));
+        binding.txtPhiDichVu.setText(formatCurrency(delivery));
+        binding.txtThue.setText(formatCurrency(tamtinh*percentTax));
+        binding.txtThanhTien.setText(formatCurrency(thanhtien));
+
     }
 
     //nut back
@@ -102,17 +111,19 @@ public class CartActivity extends AppCompatActivity {
         LinearLayout momoLayout = dialog.findViewById(R.id.layoutMomo);
         LinearLayout zalopayLayout = dialog.findViewById(R.id.layoutZaloPay);
         ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
-
+        TextView txtPayment = findViewById(R.id.txt_Payment);
+        ImageView imgPayment = findViewById(R.id.img_Payment);
 
         momoLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 dialog.dismiss();
-                Toast.makeText(CartActivity.this,"Momo được chọn",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CartActivity.this,"Momo được chọn",Toast.LENGTH_SHORT).show();
 
-                TextView txtPayment = findViewById(R.id.txt_Payment);
                 txtPayment.setText("Momo");
+                imgPayment.setImageResource(R.drawable.ic_momo_24);
+
             }
         });
 
@@ -120,10 +131,10 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Toast.makeText(CartActivity.this,"ZaloPay được chọn",Toast.LENGTH_SHORT).show();
-
-                TextView txtPayment = findViewById(R.id.txt_Payment);
+                //Toast.makeText(CartActivity.this,"ZaloPay được chọn",Toast.LENGTH_SHORT).show();
                 txtPayment.setText("ZaloPay");
+                imgPayment.setImageResource(R.drawable.ic_zalopay);
+
             }
         });
 

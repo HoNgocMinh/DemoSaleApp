@@ -18,6 +18,7 @@ import com.example.project167.databinding.ViewholderCartBinding;
 import com.example.project167.databinding.ViewholderPupListBinding;
 import com.example.project167.domain.PopularDomain;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
@@ -41,14 +42,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
 
         return new Viewholder(binding);
     }
+    //format định dạng tiền
+    public static String formatCurrency(double amount) {
+        double scaledAmount = amount * 1000; // Nhân với 1000
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        return formatter.format(scaledAmount) + "đ";
+    }
 
     @Override
     public void onBindViewHolder(@NonNull CartAdapter.Viewholder holder, int position) {
-        binding.titleTxt.setText(items.get(position).getTitle());
-        binding.feeEachItem.setText("$" + items.get(position).getPrice());
-        binding.totalEachItem.setText("$" + Math.round(items.get(position).getNumberInCart() * items.get(position).getPrice()));
-        binding.numberItemTxt.setText(String.valueOf(items.get(position).getNumberInCart()));
-
+        binding.txtTenKhoaHoc.setText(items.get(position).getTitle());
+        binding.txtPrice.setText(formatCurrency(items.get(position).getPrice()));
 
         int drawableResourced = holder.itemView.getResources().getIdentifier(items.get(position).getPicUrl()
                 , "drawable", holder.itemView.getContext().getPackageName());
@@ -57,21 +61,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
                 .load(drawableResourced)
                 .transform(new GranularRoundedCorners(30, 30, 0, 0))
                 .into(binding.pic);
-
-
-        binding.plusCartBtn.setOnClickListener(v -> managmentCart.plusNumberItem(items, position, () -> {
-
-            changeNumberItemsListener.change();
-            binding.numberItemTxt.setText(String.valueOf(items.get(position).getNumberInCart()));
-            notifyItemChanged(position);
-        }));
-
-        binding.minusCartItem.setOnClickListener(v -> managmentCart.minusNumberItem(items, position, () -> {
-
-            changeNumberItemsListener.change();
-            binding.numberItemTxt.setText(String.valueOf(items.get(position).getNumberInCart()));
-            notifyItemChanged(position);
-        }));
     }
 
     @Override

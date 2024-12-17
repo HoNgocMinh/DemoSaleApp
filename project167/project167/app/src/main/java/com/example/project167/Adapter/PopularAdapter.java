@@ -15,6 +15,7 @@ import com.example.project167.Activity.DetailActivity;
 import com.example.project167.databinding.ViewholderPupListBinding;
 import com.example.project167.domain.PopularDomain;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.Viewholder> {
@@ -33,11 +34,17 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.Viewhold
         context = parent.getContext();
         return new Viewholder(binding);
     }
+    //format định dạng tiền
+    public static String formatCurrency(double amount) {
+        double scaledAmount = amount * 1000; // Nhân với 1000
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        return formatter.format(scaledAmount) + "đ";
+    }
 
     @Override
     public void onBindViewHolder(@NonNull PopularAdapter.Viewholder holder, int position) {
         binding.titleTxt.setText(items.get(position).getTitle());
-        binding.feeTxt.setText("$" + items.get(position).getPrice());
+        binding.feeTxt.setText(formatCurrency(items.get(position).getPrice()));
         binding.scoreTxt.setText("" + items.get(position).getScore()); // test dòng này
         binding.reviewTxt.setText("" + items.get(position).getReview());
 

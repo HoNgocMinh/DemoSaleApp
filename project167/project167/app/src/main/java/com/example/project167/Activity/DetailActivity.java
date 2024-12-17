@@ -14,10 +14,11 @@ import com.example.project167.R;
 import com.example.project167.databinding.ActivityDetailBinding;
 import com.example.project167.domain.PopularDomain;
 
+import java.text.DecimalFormat;
+
 public class DetailActivity extends AppCompatActivity {
     private ActivityDetailBinding binding;
     private PopularDomain object;
-    private int numberOrder = 1;
     private ManagmentCart managmentCart;
 
     @Override
@@ -36,6 +37,14 @@ public class DetailActivity extends AppCompatActivity {
         window.setStatusBarColor(ContextCompat.getColor(DetailActivity.this, R.color.white));
     }
 
+    //format định dạng tiền
+    public static String formatCurrency(double amount) {
+        double scaledAmount = amount * 1000; // Nhân với 1000
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        return formatter.format(scaledAmount) + "đ";
+    }
+
+
     private void getBundles() {
         object = (PopularDomain) getIntent().getSerializableExtra("object");
 
@@ -45,7 +54,7 @@ public class DetailActivity extends AppCompatActivity {
                 .into(binding.itemPic);
 
         binding.titleTxt.setText(object.getTitle());
-        binding.priceTxt.setText("$" + object.getPrice()); // Test
+        binding.priceTxt.setText(formatCurrency(object.getPrice())); // Test
         binding.descriptionTxt.setText(object.getDescription());
         binding.reviewTxt.setText(object.getReview() + "");
         binding.ratingTxt.setText(object.getScore() + "");

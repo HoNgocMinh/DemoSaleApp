@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.SharedPreferences;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             txtUserFullName.setText("Người dùng chưa đăng nhập");
         }
+
+        //check veriy mail
+//        if(!firebaseAuth.getCurrentUser().isEmailVerified()){
+//            Toast.makeText(this, "Vui lòng xác thực Email.", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     private void SeeMoreCourseNavigation(){

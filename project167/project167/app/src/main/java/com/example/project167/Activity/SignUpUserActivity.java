@@ -116,7 +116,13 @@ public class SignUpUserActivity extends AppCompatActivity {
                                         Log.d("Firebase", "User profile updated.");
 
                                         // Sau khi cập nhật thành công, chuyển đến trang đăng nhập
-                                        Toast.makeText(SignUpUserActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                                        //send verification email
+                                        fAuth.getCurrentUser().sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(SignUpUserActivity.this, "Đăng ký thành công, đã gửi mail xác thực.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
                                         Intent intent = new Intent(SignUpUserActivity.this, LoginUserActivity.class);
                                         startActivity(intent);
                                         finish();

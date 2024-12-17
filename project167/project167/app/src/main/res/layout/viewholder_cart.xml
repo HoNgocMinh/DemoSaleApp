@@ -31,84 +31,46 @@
         app:layout_constraintTop_toTopOf="@+id/view6" />
 
     <TextView
-        android:id="@+id/titleTxt"
+        android:id="@+id/txt_TenKhoaHoc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="title"
-        android:textColor="@color/black"
+        android:text="Tên khóa học"
+        android:textColor="@color/dark_blue"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/view6"
         app:layout_constraintTop_toTopOf="@+id/view6" />
 
     <TextView
-        android:id="@+id/feeEachItem"
+        android:id="@+id/txt_Price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="0"
+        android:text="Giá tiền"
         android:textSize="18sp"
-
-        android:textColor="@color/purple_light"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/view6"
         app:layout_constraintStart_toEndOf="@+id/view6" />
 
-    <TextView
-        android:id="@+id/totalEachItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="0"
-        android:textColor="@color/purple_light"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="100dp"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="@+id/feeEachItem"
-        app:layout_constraintEnd_toEndOf="@+id/totalEachItem">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_Price"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:id="@+id/plusCartBtn"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:text="+"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:background="@drawable/white_circle_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/numberItemTxt"
+        <ImageView
+            android:id="@+id/btn_Delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginEnd="12dp"
-            android:textColor="@color/black"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/plusCartBtn"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/trash_fill" />
 
-        <TextView
-            android:id="@+id/minusCartItem"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:text="-"
-            android:textColor="@color/black"
-android:gravity="center"
-            android:layout_marginEnd="12dp"
-            android:background="@drawable/white_circle_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/numberItemTxt"
-            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

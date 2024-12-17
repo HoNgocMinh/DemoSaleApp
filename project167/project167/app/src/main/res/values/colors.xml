@@ -21,4 +21,7 @@
 
     <color name="dark_blue">#11366A</color>
     <color name="light_blue">#EBF1FD</color>
+
+    <color name="red">#B90E0A</color>
+
 </resources>
