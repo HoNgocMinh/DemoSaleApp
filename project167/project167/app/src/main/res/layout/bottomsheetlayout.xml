@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_round_remove_24"
         android:layout_gravity="center|top"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        app:tint="@color/dark_blue" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,16 +29,17 @@
             android:text="Phương thức thanh toán"
             android:textAlignment="viewStart"
             android:textColor="@color/dark_blue"
-            android:textStyle="bold"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
         <ImageView
+            android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/ic_baseline_clear_24"
-            android:layout_marginLeft="250dp"
-            android:layout_marginTop="8dp"
-            android:id="@+id/cancelButton" />
+            app:tint="@color/dark_blue" />
 
     </LinearLayout>
 
@@ -46,22 +48,24 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
         android:padding="10dp">
 
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_whatshot_24"
-            app:tint="@color/dark_blue" />
+    <ImageView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:src="@drawable/ic_momo_24"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:text="Momo"
+            android:textStyle="bold"
+            android:layout_gravity="center"
             android:textColor="@color/dark_blue"
             android:textSize="16sp" />
 
@@ -72,26 +76,25 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="32dp"
         android:layout_marginEnd="16dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:paddingTop="10dp"
-        android:paddingBottom="30dp">
-
-
+        android:paddingBottom="30dp"
+        android:padding="10dp">
 
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_whatshot_24"
-            app:tint="@color/dark_blue" />
+            android:src="@drawable/ic_zalopay"
+        />
 
         <TextView
+            android:textStyle="bold"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:text="Zalo Pay"
+            android:text="ZaloPay"
             android:textColor="@color/dark_blue"
             android:textSize="16sp" />
 

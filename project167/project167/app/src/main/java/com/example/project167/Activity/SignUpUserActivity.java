@@ -4,14 +4,25 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project167.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -21,6 +32,8 @@ public class SignUpUserActivity extends AppCompatActivity {
     private EditText inputFullName, inputUserName, inputPassword, inputRePassword;
     private Button btnSignUp;
     private TextView txtLogin;
+    FirebaseAuth fAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +47,8 @@ public class SignUpUserActivity extends AppCompatActivity {
         inputRePassword = findViewById(R.id.input_RePwd);
         btnSignUp = findViewById(R.id.btn_Signup);
         txtLogin = findViewById(R.id.txt_login);
+
+        fAuth = FirebaseAuth.getInstance();
 
         // Xử lý sự kiện nút Đăng ký
         btnSignUp.setOnClickListener(v -> handleSignUp());
@@ -64,53 +79,61 @@ public class SignUpUserActivity extends AppCompatActivity {
             return;
         }
 
-        // Kiểm tra xem tên đăng nhập đã tồn tại chưa
-        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        String savedUserName = sharedPreferences.getString("userName", "");
-        if (userName.equals(savedUserName)) {
-            Toast.makeText(this, "Tên đăng nhập đã tồn tại, vui lòng chọn tên khác", Toast.LENGTH_SHORT).show();
+        if(fullName.isEmpty()){
+            inputFullName.setError("Vui lòng nhập họ và tên.");
             return;
         }
 
-        // Lưu thông tin người dùng
-        saveUser(fullName, userName, password);
-
-        // Thông báo và chuyển sang màn hình đăng nhập
-        Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(SignUpUserActivity.this, LoginUserActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    private void saveUser(String fullName, String userName, String password) {
-        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("userFullName", fullName);
-        editor.putString("userName", userName);
-
-        // Mã hóa mật khẩu trước khi lưu
-        String encryptedPassword = encryptPassword(password);
-        editor.putString("userPassword", encryptedPassword);
-        editor.apply();
-    }
-
-    private String encryptPassword(String password) {
-        try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            messageDigest.update(password.getBytes());
-            byte[] hash = messageDigest.digest();
-
-            // Chuyển hash thành chuỗi hex
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
+        if(userName.isEmpty()){
+            inputUserName.setError("Vui lòng nhập email.");
+            return;
         }
+        if(password.isEmpty()){
+            inputPassword.setError("Vui lòng nhập mật khẩu.");
+            return;
+        }
+        if(rePassword.isEmpty()){
+            inputRePassword.setError("Mật khẩu không khớp.");
+            return;
+        }
+
+        fAuth.createUserWithEmailAndPassword(userName,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                FirebaseUser user = fAuth.getCurrentUser();
+                if (user != null) {
+
+                    // Cập nhật Display Name (Họ tên) của người dùng
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(fullName) // fullName là chuỗi họ tên từ form đăng ký
+                            .build();
+
+                    user.updateProfile(profileUpdates)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("Firebase", "User profile updated.");
+
+                                        // Sau khi cập nhật thành công, chuyển đến trang đăng nhập
+                                        Toast.makeText(SignUpUserActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(SignUpUserActivity.this, LoginUserActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Log.e("Firebase", "Failed to update profile: " + task.getException().getMessage());
+                                        Toast.makeText(SignUpUserActivity.this, "Failed to save user profile.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(SignUpUserActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
 }

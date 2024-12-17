@@ -10,20 +10,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project167.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginUserActivity extends AppCompatActivity {
 
     private EditText inputUserName, inputPassword;
     private Button btnLogin;
     private TextView txtSignUp, txtAdminLogin;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         // Ánh xạ các thành phần giao diện
         inputUserName = findViewById(R.id.input_UserName);
@@ -39,16 +47,13 @@ public class LoginUserActivity extends AppCompatActivity {
             MainNavigation();
         }
 
-        // Xử lý sự kiện nút Đăng nhập
-        btnLogin.setOnClickListener(v -> handleLogin(sharedPreferences));
-
         // Xử lý sự kiện chuyển sang màn hình đăng ký
         txtSignUp.setOnClickListener(v -> {
             Intent intent = new Intent(LoginUserActivity.this, SignUpUserActivity.class);
             startActivity(intent);
         });
 
-        // Xử lý chuyển hướng giao diện login_admin
+                // Xử lý chuyển hướng giao diện login_admin
         txtAdminLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,71 +62,57 @@ public class LoginUserActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
 
-    private void handleLogin(SharedPreferences sharedPreferences) {
-        String userName = inputUserName.getText().toString().trim();
-        String password = inputPassword.getText().toString().trim();
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //extract / validate
+                if (inputUserName.getText().toString().isEmpty()){
+                    inputUserName.setError("Không có email");
+                    return;
+                }
+                if (inputPassword.getText().toString().isEmpty()){
+                    inputPassword.setError("Không thấy password.");
+                    return;
+                }
 
-        // Kiểm tra thông tin nhập vào
-        if (TextUtils.isEmpty(userName) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-            return;
-        }
+                // data is valid
+                // login user
 
-        // Lấy thông tin tài khoản từ SharedPreferences
-        String savedUserName = sharedPreferences.getString("userName", "");
-        String savedPassword = sharedPreferences.getString("userPassword", "");
+                firebaseAuth.signInWithEmailAndPassword(inputUserName.getText().toString(),inputPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                     //login suceessful
+                        Toast.makeText(LoginUserActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
 
-        // Kiểm tra tài khoản và mật khẩu
-        if (userName.equals(savedUserName) && encryptPassword(password).equals(savedPassword)) {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("isLoggedIn", true);
-            editor.apply();
-
-            Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-
-            // Kiểm tra nếu người dùng đến từ Giỏ hàng
-            Intent intent;
-            boolean fromCart = getIntent().getBooleanExtra("fromCart", false);
-            // Logic từ giỏ hàng về lại giỏ hàng sau đăng nhập
-            if (fromCart) {
-                // Nếu đến từ giỏ hàng, chuyển về lại giỏ hàng
-                intent = new Intent(LoginUserActivity.this, CartActivity.class);
-            } else {
-                // Nếu không, chuyển đến MainActivity
-                intent = new Intent(LoginUserActivity.this, MainActivity.class);
+                        // Kiểm tra nếu người dùng đến từ Giỏ hàng
+                        Intent intent;
+                        boolean fromCart = getIntent().getBooleanExtra("fromCart", false);
+                        // Logic từ giỏ hàng về lại giỏ hàng sau đăng nhập
+                        if (fromCart) {
+                            // Nếu đến từ giỏ hàng, chuyển về lại giỏ hàng
+                            intent = new Intent(LoginUserActivity.this, CartActivity.class);
+                        } else {
+                            // Nếu không, chuyển đến MainActivity
+                            intent = new Intent(LoginUserActivity.this, MainActivity.class);
+                        }
+                        startActivity(intent);
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(LoginUserActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
-            startActivity(intent);
-            finish();
-        } else {
-            Toast.makeText(this, "Tên đăng nhập hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
-        }
+        });
+
     }
 
     private void MainNavigation() {
         Intent intent = new Intent(LoginUserActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
-    }
-
-    private String encryptPassword(String password) {
-        try {
-            java.security.MessageDigest messageDigest = java.security.MessageDigest.getInstance("SHA-256");
-            messageDigest.update(password.getBytes());
-            byte[] hash = messageDigest.digest();
-
-            // Chuyển hash thành chuỗi hex
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (java.security.NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 }

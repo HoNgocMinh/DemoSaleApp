@@ -6,14 +6,22 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityProfileBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class ProfileUserActivity extends AppCompatActivity {
     ActivityProfileBinding binding;
+
+    private FirebaseAuth firebaseAuth;
+    private TextView txtUserFullName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +34,27 @@ public class ProfileUserActivity extends AppCompatActivity {
         CourseNavigation();
         LogoutNavigation();
         statusBarColor();
+
+        // Liên kết TextView
+        txtUserFullName = findViewById(R.id.txt_UserFullName);
+
+        // Lấy thông tin từ Firebase Auth
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        if (user != null) {
+            // Lấy Display Name (Full Name)
+            String fullName = user.getDisplayName();
+            if (fullName != null) {
+                txtUserFullName.setText(fullName);
+            } else {
+                txtUserFullName.setText("Tên người dùng chưa được cập nhật");
+            }
+        } else {
+            txtUserFullName.setText("Người dùng chưa đăng nhập");
+        }
+
+
     }
 
     private void CourseNavigation() {
@@ -53,20 +82,16 @@ public class ProfileUserActivity extends AppCompatActivity {
     }
 
     private void LogoutNavigation() {
-        binding.btnLogout.setOnClickListener(v -> {
-            // Xóa trạng thái đăng nhập
-            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("isLoggedIn", false);  // Đặt lại trạng thái là chưa đăng nhập
-            editor.apply();
-
-            Toast.makeText(ProfileUserActivity.this, "Đã đăng xuất thành công", Toast.LENGTH_SHORT).show();
-
-            // Chuyển hướng về màn hình đăng nhập
-            Intent intent = new Intent(ProfileUserActivity.this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-            finish();
+        binding.btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(ProfileUserActivity.this, MainActivity.class);
+                Toast.makeText(ProfileUserActivity.this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
         });
     }
     //chỉnh màu thanh trạng thái

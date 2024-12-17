@@ -8,23 +8,30 @@ import android.content.SharedPreferences;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project167.Adapter.PopularAdapter;
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityMainBinding;
 import com.example.project167.domain.PopularDomain;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private TextView txtUserFullName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
         //ConstraintLayout btn1=findViewById(R.id.currentCourse);
         //btn1.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesListActivity.class)));
@@ -36,6 +43,25 @@ public class MainActivity extends AppCompatActivity {
          ProfileNavigation();
          SeeMoreCourseNavigation();
          SeeMoreCategoryNavigation();
+
+        // Liên kết TextView
+        txtUserFullName = findViewById(R.id.txt_UserName);
+
+        // Lấy thông tin từ Firebase Auth
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        if (user != null) {
+            // Lấy Display Name (Full Name)
+            String fullName = user.getDisplayName();
+            if (fullName != null) {
+                txtUserFullName.setText(fullName);
+            } else {
+                txtUserFullName.setText("Tên người dùng chưa được cập nhật");
+            }
+        } else {
+            txtUserFullName.setText("Người dùng chưa đăng nhập");
+        }
     }
 
     private void SeeMoreCourseNavigation(){
@@ -45,44 +71,30 @@ public class MainActivity extends AppCompatActivity {
     private void SeeMoreCategoryNavigation(){
         binding.btnSeeAllCategory.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CategoryListActivity.class)));
     }
-
-    private void CartNavigation() {
-        binding.btnCart.setOnClickListener(v -> {
-            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-            boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
-
-            if (isLoggedIn) {
-                // Nếu đã đăng nhập, chuyển đến màn hình Profile
-                Intent intent = new Intent(MainActivity.this, CartActivity.class);
-                startActivity(intent);
-            } else {
-                Toast.makeText(MainActivity.this, "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, LoginUserActivity.class);
-                // test
-                intent.putExtra("fromCart", true);
-                startActivity(intent);
-            }
-        });
-    }
-
-     //Điều hướng đến khóa học
+    //Điều hướng đến khóa học
     private void CourseNavigation() {
         binding.currentCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesPopularListActivity.class)));
     }
 
+    private void CartNavigation() {
+        binding.btnCart.setOnClickListener(v->startActivity(new Intent(MainActivity.this, CartActivity.class)));
+    }
+
     private void ProfileNavigation() {
         binding.btnMyProfile.setOnClickListener(v -> {
-            // Lấy trạng thái đăng nhập từ SharedPreferences
-            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-            boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+            // Lấy trạng thái đăng nhập
+            FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
-            if (isLoggedIn) {
-                // Nếu đã đăng nhập, chuyển đến màn hình Profile
-                Intent intent = new Intent(MainActivity.this, ProfileUserActivity.class);
-                startActivity(intent);
-            } else {
+            if (currentUser == null) {
+                // Nếu người dùng chưa đăng nhập, chuyển về trang Login
                 Toast.makeText(MainActivity.this, "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, LoginUserActivity.class);
+                Intent intent = new Intent(this, LoginUserActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            // Nếu đã đăng nhập, chuyển sang trang
+            else {
+                Intent intent = new Intent(MainActivity.this, ProfileUserActivity.class);
                 startActivity(intent);
             }
         });
