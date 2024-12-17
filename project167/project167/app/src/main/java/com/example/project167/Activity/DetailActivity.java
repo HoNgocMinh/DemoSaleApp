@@ -3,6 +3,7 @@ package com.example.project167.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -53,6 +54,8 @@ public class DetailActivity extends AppCompatActivity {
             //object.setNumberInCart(numberOrder);
             managmentCart.insertFood(object);
         });
+
+        binding.btnToCart.setOnClickListener(v -> startActivity(new Intent(DetailActivity.this, CartActivity.class)));
 
         binding.backBtn.setOnClickListener(v -> finish());
     }

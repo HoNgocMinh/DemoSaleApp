@@ -47,22 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void CartNavigation() {
-        binding.btnCart.setOnClickListener(v -> {
-            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-            boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
-
-            if (isLoggedIn) {
-                // Nếu đã đăng nhập, chuyển đến màn hình Profile
-                Intent intent = new Intent(MainActivity.this, CartActivity.class);
-                startActivity(intent);
-            } else {
-                Toast.makeText(MainActivity.this, "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, LoginUserActivity.class);
-                // test
-                intent.putExtra("fromCart", true);
-                startActivity(intent);
-            }
-        });
+        binding.btnCart.setOnClickListener(v->startActivity(new Intent(MainActivity.this, CartActivity.class)));
     }
 
      //Điều hướng đến khóa học
