@@ -35,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="Tên khóa học"
         android:textColor="@color/dark_blue"
         android:textSize="18sp"
@@ -48,17 +49,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Giá tiền"
-        android:textSize="18sp"
         android:textColor="@color/black"
+        android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/view6"
-        app:layout_constraintStart_toEndOf="@+id/view6" />
+        app:layout_constraintStart_toEndOf="@+id/view6"
+        app:layout_constraintTop_toBottomOf="@+id/txt_TenKhoaHoc"
+        app:layout_constraintVertical_bias="0.21" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_Price"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView

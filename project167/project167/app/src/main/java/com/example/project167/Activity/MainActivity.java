@@ -13,18 +13,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project167.Adapter.PopularAdapter;
+import com.example.project167.Helper.ManagmentCart;
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityMainBinding;
 import com.example.project167.domain.PopularDomain;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Calendar;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private ManagmentCart managmentCart;
     ActivityMainBinding binding;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    private TextView txtUserFullName;
+    TextView txtUserFullName, txticonNumber, txtHello;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,26 @@ public class MainActivity extends AppCompatActivity {
          SeeMoreCategoryNavigation();
 
         // Liên kết TextView
+        txticonNumber = findViewById(R.id.txt_iconNumber);
         txtUserFullName = findViewById(R.id.txt_UserName);
+        txtHello = findViewById(R.id.txt_Hello);
+
+        //Lấy giờ hiện tại, Xác định câu chào dựa vào giờ
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY); // Giờ hiện tại (0 - 23)
+
+        String greeting;
+        if (hour >= 5 && hour < 12) {
+            greeting = "Chào buổi sáng,";
+        } else if (hour >= 12 && hour < 14) {
+            greeting = "Chào buổi trưa,";
+        } else if (hour >= 14 && hour < 18) {
+            greeting = "Chào buổi chiều,";
+        } else {
+            greeting = "Chào buổi tối,";
+        }
+
+        txtHello.setText(greeting);
 
         // Lấy thông tin từ Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance();
@@ -60,14 +83,15 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 txtUserFullName.setText("Tên người dùng chưa được cập nhật");
             }
+            if(!firebaseAuth.getCurrentUser().isEmailVerified()){
+                Toast.makeText(this, "Vui lòng xác thực Email.", Toast.LENGTH_SHORT).show();
+            }
         } else {
-            txtUserFullName.setText("Người dùng chưa đăng nhập");
+            txtUserFullName.setText("Khách");
         }
 
         //check veriy mail
-//        if(!firebaseAuth.getCurrentUser().isEmailVerified()){
-//            Toast.makeText(this, "Vui lòng xác thực Email.", Toast.LENGTH_SHORT).show();
-//        }
+
     }
 
     private void SeeMoreCourseNavigation(){
