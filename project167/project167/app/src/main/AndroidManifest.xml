@@ -41,19 +41,26 @@
         <activity android:name=".Activity.SignUpUserActivity"
             android:exported="false"/>
 
-        <!--MainActivity-->
+        <!--LoginUserActivity-->
         <activity android:name=".Activity.LoginUserActivity"
             android:exported="false"/>
 
-        <!--MainActivity-->
+        <!--CoursesPopularListActivity-->
         <activity android:name=".Activity.CoursesPopularListActivity"
             android:exported="false"/>
 
+        <!--CategoryListActivity-->
         <activity android:name=".Activity.CategoryListActivity"
             android:exported="false"/>
 
+        <!--ProfileUserActivity-->
         <activity android:name=".Activity.ProfileUserActivity"
             android:exported="false"/>
+
+        <!--CourseCategoryIdActivity-->
+        <activity
+            android:name=".Activity.CourseCategoryIdActivity"
+            android:exported="false" />
 
         <!-- IntroActivity -->
         <activity

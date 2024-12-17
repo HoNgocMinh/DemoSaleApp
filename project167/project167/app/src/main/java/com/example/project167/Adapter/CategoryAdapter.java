@@ -1,6 +1,7 @@
 package com.example.project167.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.project167.Activity.CourseCategoryIdActivity;
+import com.example.project167.Activity.CoursesPopularListActivity;
 import com.example.project167.domain.CategoryDomain;
 import com.example.project167.R;
 
@@ -44,7 +47,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 .load(drawableResourceId)
                 .into(holder.pic);
 
-        // Set different backgrounds for each category item based on position
         switch (position) {
             case 0:
                 holder.background_img.setImageResource(R.drawable.bg_1);
@@ -67,7 +69,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 holder.layout.setBackgroundResource(R.drawable.list_background_5);
                 break;
         }
+
+        // Test Navigate to CoursesPopularListActivity on item click
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, CourseCategoryIdActivity.class);
+            intent.putExtra("CATEGORY_ID", categories.get(position).getId()); // Pass the category ID
+            context.startActivity(intent);
+        });
     }
+
 
     @Override
     public int getItemCount() {

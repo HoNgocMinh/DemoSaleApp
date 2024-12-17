@@ -20,7 +20,7 @@ import com.example.project167.R;
 
 import java.util.ArrayList;
 
-public class CoursesPopularListActivity extends AppCompatActivity {
+public class CourseCategoryIdActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapterCourceList;
     private RecyclerView recyclerViewCourse;
     private SaleCourse dbHelper; // Đối tượng SaleCourse để kết nối cơ sở dữ liệu
@@ -37,39 +37,45 @@ public class CoursesPopularListActivity extends AppCompatActivity {
         // Khởi tạo đối tượng SaleCourse
         dbHelper = new SaleCourse(this);
 
-        //Fix tối ưu viết lệnh
+        //Fix tối ưu viết lệnh (cần lưu ý)
         SQLiteDatabase db = this.dbHelper.getReadableDatabase();
         dbHelper.BasicCategory(db);
         dbHelper.BasicCourse(db);
 
-        initRecyclerView();
+        // Nhận CATEGORY_ID từ Intent
+        int categoryId = getIntent().getIntExtra("CATEGORY_ID", -1);
+
+        if (categoryId == -1) {
+            Toast.makeText(this, "Invalid category ID", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        initRecyclerView(categoryId);
         setVariable();
     }
 
     private void statusBarColor() {
-        Window window = CoursesPopularListActivity.this.getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(CoursesPopularListActivity.this, R.color.white));
+        Window window = CourseCategoryIdActivity.this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(CourseCategoryIdActivity.this, R.color.white));
     }
 
-    private void initRecyclerView() {
-        // Lấy dữ liệu từ cơ sở dữ liệu
-        ArrayList<PopularDomain> items = getCoursesFromDatabase();
+    private void initRecyclerView(int categoryId) {
+        // Lấy danh sách khóa học theo CATEGORY_ID
+        ArrayList<PopularDomain> items = getCoursesByCategoryId(categoryId);
 
         recyclerViewCourse = findViewById(R.id.view);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-
         recyclerViewCourse.setLayoutManager(gridLayoutManager);
 
-        //binding.PopularView.setLayoutManager(gridLayoutManager);
-        //binding.PopularView.setAdapter(new PopularAdapter(items));
-        // Tạo adapter và thiết lập cho RecyclerView
+        //Thiets lập adapter
         adapterCourceList = new PopularAdapter(items);
         recyclerViewCourse.setAdapter(adapterCourceList);
     }
 
-    private ArrayList<PopularDomain> getCoursesFromDatabase() {
+    private ArrayList<PopularDomain> getCoursesByCategoryId(int categoryId) {
         ArrayList<PopularDomain> courses = new ArrayList<>();
-        Cursor cursor = dbHelper.getAllCourses();  // Truy vấn tất cả các khóa học từ cơ sở dữ liệu
+        Cursor cursor = dbHelper.getCoursesByCategoryId(categoryId);  // Truy vấn tất cả các khóa học có id là category
 
         // Kiểm tra nếu cursor không null và di chuyển tới dòng đầu tiên
         if (cursor != null && cursor.moveToFirst()) {
@@ -96,7 +102,7 @@ public class CoursesPopularListActivity extends AppCompatActivity {
                     courses.add(new PopularDomain(title, picPath, count_review, score, price,description));
                 } else {
                     // Nếu một trong các cột không tồn tại, bạn có thể xử lý lỗi ở đây
-                    Log.e("CoursesPopularListActivity", "Column index is invalid!");
+                    Log.e("CourseCategoryIdActivity", "Column index is invalid!");
                 }
             } while (cursor.moveToNext());
 

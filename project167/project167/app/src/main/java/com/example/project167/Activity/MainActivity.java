@@ -63,12 +63,10 @@ public class MainActivity extends AppCompatActivity {
 
             if (isLoggedIn) {
                 // Nếu đã đăng nhập, chuyển đến màn hình Profile
-                Intent intent = new Intent(MainActivity.this, ProfileUserActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(MainActivity.this, ProfileUserActivity.class));
             } else {
                 Toast.makeText(MainActivity.this, "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, LoginUserActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(MainActivity.this, LoginUserActivity.class));
             }
         });
     }
