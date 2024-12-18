@@ -5,34 +5,58 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project167.Adapter.CartAdapter;
+import com.example.project167.Api.CreateOrder;
 import com.example.project167.Helper.ManagmentCart;
+import com.example.project167.PaymentNotification;
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityCartBinding;
 
+import org.json.JSONObject;
+
 import java.text.DecimalFormat;
+
+import vn.zalopay.sdk.Environment;
+import vn.zalopay.sdk.ZaloPayError;
+import vn.zalopay.sdk.ZaloPaySDK;
+import vn.zalopay.sdk.listeners.PayOrderListener;
 
 public class CartActivity extends AppCompatActivity {
     private ManagmentCart managmentCart;
     ActivityCartBinding binding;
-
+    String txt_outthanhtien;
+    String selectedPaymentMethod = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCartBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //ZaloPay
+        StrictMode.ThreadPolicy policy = new
+                StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        // ZaloPay SDK Init
+        ZaloPaySDK.init(2553, Environment.SANDBOX);
+
+
 
         managmentCart = new ManagmentCart(this);
 
@@ -50,15 +74,69 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
+        //Xử lí bấm nút thanh toán
+        binding.btnThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (selectedPaymentMethod.isEmpty()) {
+                    Toast.makeText(CartActivity.this, "Vui lòng chọn phương thức thanh toán", Toast.LENGTH_SHORT).show();
+                } else if (selectedPaymentMethod.equals("Momo")) {
+                    //Thanh toán bằng momo
+                    Toast.makeText(CartActivity.this, "Thanh toán bằng Momo không khả dụng.", Toast.LENGTH_SHORT).show();
+                }
+                else if(selectedPaymentMethod.equals("ZaloPay")){
+                    //thanh tón zalopay
+                    CreateOrder orderApi = new CreateOrder();
+                try {
+                    JSONObject data = orderApi.createOrder(txt_outthanhtien);
+                    String code = data.getString("return_code");
+                    if (code.equals("1")) {
+                        String token = data.getString("zp_trans_token");
+                        ZaloPaySDK.getInstance().payOrder(CartActivity.this, token, "demozpdk://app", new PayOrderListener() {
+                            @Override
+                            public void onPaymentSucceeded(String s, String s1, String s2) {
+                                Intent intent1 = new Intent(CartActivity.this, PaymentNotification.class);
+                                intent1.putExtra("result","Thanh toán thành công.");
+                                startActivity(intent1);
+                            }
+
+                            @Override
+                            public void onPaymentCanceled(String s, String s1) {
+                                Intent intent1 = new Intent(CartActivity.this, PaymentNotification.class);
+                                intent1.putExtra("result","Hủy thanh toán.");
+                                startActivity(intent1);
+                            }
+
+                            @Override
+                            public void onPaymentError(ZaloPayError zaloPayError, String s, String s1) {
+                                Intent intent1 = new Intent(CartActivity.this, PaymentNotification.class);
+                                intent1.putExtra("result","Lỗi thanh toán.");
+                                startActivity(intent1);
+                            }
+                        });
+                    }
+                }
+                catch(Exception e){
+                        e.printStackTrace();
+                }
+            }
+        }
+        });
+
 
     }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        ZaloPaySDK.getInstance().onResult(intent);
+    }
+
     //format định dạng tiền
     public static String formatCurrency(double amount) {
         double scaledAmount = amount * 1000; // Nhân với 1000
         DecimalFormat formatter = new DecimalFormat("#,###");
         return formatter.format(scaledAmount) + "đ";
     }
-
 
     //chỉnh màu thanh trạng thái
     private void statusBarColor() {
@@ -89,8 +167,9 @@ public class CartActivity extends AppCompatActivity {
         binding.cartView.setAdapter(new CartAdapter(managmentCart.getListCart(),this, () -> calculateCart()));
     }
 
-    //làm phép toán
-    private void calculateCart() {
+    //làm phép toán tính tiền
+    public void calculateCart() {
+
         double percentTax = 0.08;
         double delivery = 10;
 
@@ -102,20 +181,20 @@ public class CartActivity extends AppCompatActivity {
         binding.txtThue.setText(formatCurrency(tamtinh*percentTax));
         binding.txtThanhTien.setText(formatCurrency(thanhtien));
 
+        txt_outthanhtien = String.valueOf((int) thanhtien*1000);
+        Log.d("aa",txt_outthanhtien);
+
         if (managmentCart.getListCart().isEmpty()) {
             binding.emptyTxt.setVisibility(View.VISIBLE);
             binding.scroll.setVisibility(View.GONE);
         }
     }
-
     //nut back
     private void setVariable() {
         binding.backBtn.setOnClickListener(v -> finish());
     }
 
-
     //Chon phuong thuc thanh toan
-
     private void showBottomDialog() {
 
         final Dialog dialog = new Dialog(this);
@@ -137,7 +216,7 @@ public class CartActivity extends AppCompatActivity {
 
                 txtPayment.setText("Momo");
                 imgPayment.setImageResource(R.drawable.ic_momo_24);
-
+                selectedPaymentMethod = "Momo";
             }
         });
 
@@ -148,7 +227,7 @@ public class CartActivity extends AppCompatActivity {
                 //Toast.makeText(CartActivity.this,"ZaloPay được chọn",Toast.LENGTH_SHORT).show();
                 txtPayment.setText("ZaloPay");
                 imgPayment.setImageResource(R.drawable.ic_zalopay);
-
+                selectedPaymentMethod = "ZaloPay";
             }
         });
 

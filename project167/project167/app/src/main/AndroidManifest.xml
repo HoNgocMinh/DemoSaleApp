@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -15,18 +17,33 @@
         android:theme="@style/Theme.Project167"
         tools:targetApi="31">
         <activity
+            android:name=".PaymentNotification"
+            android:exported="true" />
+        <activity
             android:name=".Activity.ResetPassword"
-            android:exported="false" />
-        <!-- LoginAdminActivity -->
+            android:exported="false" /> <!-- LoginAdminActivity -->
         <activity
             android:name=".Activity.LoginAdminActivity"
             android:exported="false" /> <!-- ProfileAdminActivity -->
         <activity
             android:name=".Activity.ProfileAdminActivity"
-            android:exported="false" /> <!-- CartActivity -->
+            android:exported="false" /> <!-- CartActivity GIỎ HÀNG -->
         <activity
             android:name=".Activity.CartActivity"
-            android:exported="false" /> <!-- DetailActivity -->
+            android:exported="true"
+            android:label="Merchant Demo"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="app"
+                    android:scheme="demozpdk" />
+            </intent-filter>
+        </activity> <!-- DetailActivity -->
         <activity
             android:name=".Activity.DetailActivity"
             android:exported="false" /> <!-- SignUpActivity -->

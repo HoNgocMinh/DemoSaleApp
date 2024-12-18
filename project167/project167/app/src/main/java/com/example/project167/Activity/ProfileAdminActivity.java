@@ -10,15 +10,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.project167.R;
+import com.example.project167.databinding.ActivityProfileAdminBinding;
 import com.example.project167.databinding.ActivityProfileBinding;
 
 public class ProfileAdminActivity extends AppCompatActivity {
-    ActivityProfileBinding binding;
+    ActivityProfileAdminBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_admin);
-        binding = ActivityProfileBinding.inflate(getLayoutInflater());
+        binding = ActivityProfileAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         LogoutNavigation();
         statusBarColor();
