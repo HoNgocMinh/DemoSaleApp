@@ -49,5 +49,25 @@ public class ManagmentCart {
         }
         return fee;
     }
+
+    //Lấy vị trí Item
+    public int getItemPosition(String itemTitle) {
+        ArrayList<PopularDomain> listpop = getListCart();
+        for (int i = 0; i < listpop.size(); i++) {
+            if (listpop.get(i).getTitle().equals(itemTitle)) {
+                return i; // Trả về vị trí của item trong danh sách
+            }
+        }
+        return -1;
+    }
+
+    //Xóa item theo vị trí
+    public void removeItem(int position) {
+        ArrayList<PopularDomain> listpop = getListCart();
+        if (position >= 0 && position < listpop.size()) {
+            listpop.remove(position); // Xóa item theo vị trí
+            tinyDB.putListObject("CartList", listpop); // Cập nhật lại giỏ hàng trong bộ nhớ
+        }
+    }
 }
 

@@ -75,6 +75,16 @@ public class CartActivity extends AppCompatActivity {
             binding.scroll.setVisibility(View.VISIBLE);
         }
 
+        // Khởi tạo adapter với callback khi thay đổi số lượng hoặc xóa
+        CartAdapter cartAdapter = new CartAdapter(managmentCart.getListCart(), this, () -> {
+            calculateCart(); // Tính toán lại tổng số tiền khi có thay đổi
+            // Cập nhật trạng thái hiển thị nếu giỏ hàng trống
+            if (managmentCart.getListCart().isEmpty()) {
+                binding.emptyTxt.setVisibility(View.VISIBLE);
+                binding.scroll.setVisibility(View.GONE);
+            }
+        });
+
         binding.cartView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.cartView.setAdapter(new CartAdapter(managmentCart.getListCart(),this, () -> calculateCart()));
     }
@@ -92,6 +102,10 @@ public class CartActivity extends AppCompatActivity {
         binding.txtThue.setText(formatCurrency(tamtinh*percentTax));
         binding.txtThanhTien.setText(formatCurrency(thanhtien));
 
+        if (managmentCart.getListCart().isEmpty()) {
+            binding.emptyTxt.setVisibility(View.VISIBLE);
+            binding.scroll.setVisibility(View.GONE);
+        }
     }
 
     //nut back

@@ -61,6 +61,22 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholder> {
                 .load(drawableResourced)
                 .transform(new GranularRoundedCorners(30, 30, 0, 0))
                 .into(binding.pic);
+
+        // Xử lý sự kiện xóa sản phẩm
+        binding.btnDelete.setOnClickListener(view -> {
+            // Xóa item từ ManagmentCart
+            managmentCart.removeItem(position);
+
+            // Cập nhật lại danh sách hiển thị
+            items.remove(position);
+            notifyItemRemoved(position); // Cập nhật RecyclerView
+            notifyItemRangeChanged(position, items.size()); // Cập nhật các item sau vị trí xóa
+
+            // Gọi callback để cập nhật tổng giá trị
+            if (changeNumberItemsListener != null) {
+                changeNumberItemsListener.change();
+            }
+        });
     }
 
     @Override
