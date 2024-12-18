@@ -11,7 +11,10 @@ import androidx.core.content.ContextCompat;
 
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityProfileAdminBinding;
+<<<<<<< HEAD
 import com.example.project167.databinding.ActivityProfileBinding;
+=======
+>>>>>>> 962470a64c1e41b585b3c773f50536da559f4f1b
 
 public class ProfileAdminActivity extends AppCompatActivity {
     ActivityProfileAdminBinding binding;
@@ -22,7 +25,18 @@ public class ProfileAdminActivity extends AppCompatActivity {
         binding = ActivityProfileAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         LogoutNavigation();
+        ManageCategoryNavigation();
+        ManageCourseNavigation();
         statusBarColor();
+    }
+
+    //Chuyển hướng quản lí danh mục
+    private void ManageCategoryNavigation(){
+        binding.btnCategoryManager.setOnClickListener(v ->{startActivity(new Intent(ProfileAdminActivity.this, ManageCategoryActivity.class));});
+    }
+
+    private void ManageCourseNavigation(){
+        binding.btnCourseManager.setOnClickListener(v -> {startActivity(new Intent(ProfileAdminActivity.this, ManageCourseActivity.class));});
     }
 
     private void LogoutNavigation() {

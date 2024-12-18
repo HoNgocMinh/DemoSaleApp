@@ -30,6 +30,7 @@ public class CourseCategoryIdActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses_popular_list);
+        //
         binding = ActivityCoursesPopularListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
