@@ -170,7 +170,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/btn_Category1"
+                    android:id="@+id/LapTrinh"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -194,7 +194,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/btn_Category2"
+                    android:id="@+id/NgonNgu"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -218,7 +218,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/btn_Category3"
+                    android:id="@+id/ThietKe"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -242,7 +242,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/btn_Category4"
+                    android:id="@+id/NauAn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"

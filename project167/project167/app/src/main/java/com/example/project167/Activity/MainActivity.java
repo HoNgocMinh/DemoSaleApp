@@ -4,11 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import android.content.SharedPreferences;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     TextView txtUserFullName, txticonNumber, txtHello;
 
+    ImageView imgLapTrinh, imgNgonNgu,imgThietKe, imgNauAn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,13 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
-        //ConstraintLayout btn1=findViewById(R.id.currentCourse);
-        //btn1.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesListActivity.class)));
-
          statusBarColor();
          initRecyclerView();
          CartNavigation();
-         CourseNavigation(); // (Điều hướng sang trang danh mục trước)
+         CourseNavigation();
          ProfileNavigation();
          SeeMoreCourseNavigation();
          SeeMoreCategoryNavigation();
@@ -54,6 +52,35 @@ public class MainActivity extends AppCompatActivity {
         txtUserFullName = findViewById(R.id.txt_UserName);
         txtHello = findViewById(R.id.txt_Hello);
 
+        //Liên kết ImageView
+        imgLapTrinh = findViewById(R.id.imageViewProgramme);
+        imgNgonNgu = findViewById(R.id.imageViewLanguage);
+        imgThietKe = findViewById(R.id.imageViewDesign);
+        imgNauAn = findViewById(R.id.imageViewCook);
+
+        imgLapTrinh.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CourseCategoryIdActivity.class);
+            intent.putExtra("CATEGORY_ID", 5);
+            startActivity(intent);
+        });
+
+        imgNgonNgu.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CourseCategoryIdActivity.class);
+            intent.putExtra("CATEGORY_ID", 4);
+            startActivity(intent);
+        });
+
+        imgThietKe.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CourseCategoryIdActivity.class);
+            intent.putExtra("CATEGORY_ID", 2);
+            startActivity(intent);
+        });
+
+        imgNauAn.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, CourseCategoryIdActivity.class);
+            intent.putExtra("CATEGORY_ID", 1);
+            startActivity(intent);
+        });
 
         //Lấy giờ hiện tại, Xác định câu chào dựa vào giờ
         Calendar calendar = Calendar.getInstance();
@@ -100,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
         int cartItemCount = cart.getCartItemCount(); // Lấy số lượng khóa học trong giỏ
         txticonNumber.setText(String.valueOf(cartItemCount)); // Hiển thị số lượng trên giao diện
     }
-
 
     private void SeeMoreCourseNavigation(){
         binding.btnSeeMorePopularCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesPopularListActivity.class)));
