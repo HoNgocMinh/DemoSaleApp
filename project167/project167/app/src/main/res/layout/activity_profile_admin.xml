@@ -110,7 +110,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/btn_myCourse"
+                    android:id="@+id/btn_CategoryManager"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="12dp"
@@ -138,7 +138,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/btn_CategoryManager"
+                    android:id="@+id/btn_CourseManager"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="12dp"

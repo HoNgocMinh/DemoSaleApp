@@ -30,7 +30,7 @@ public class LoginAdminActivity extends AppCompatActivity {
             if (userName.equals("admin") && password.equals("admin123")) {
                 // Nếu thông tin đúng, chuyển hướng tới trang Admin
                 Toast.makeText(this, "Đăng nhập admin thành công", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LoginAdminActivity.this, MainActivity.class);
+                Intent intent = new Intent(LoginAdminActivity.this, ProfileAdminActivity.class);
                 startActivity(intent);
                 finish(); // Đóng màn hình đăng nhập
             } else {

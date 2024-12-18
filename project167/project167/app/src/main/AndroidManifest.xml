@@ -14,40 +14,70 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project167"
         tools:targetApi="31">
+
         <activity
             android:name=".Activity.ResetPassword"
             android:exported="false" />
+
         <!-- LoginAdminActivity -->
         <activity
             android:name=".Activity.LoginAdminActivity"
-            android:exported="false" /> <!-- ProfileAdminActivity -->
+            android:exported="false" />
+
+        <!-- ProfileAdminActivity -->
         <activity
             android:name=".Activity.ProfileAdminActivity"
-            android:exported="false" /> <!-- CartActivity -->
+            android:exported="false" />
+
+        <!-- CartActivity -->
         <activity
             android:name=".Activity.CartActivity"
-            android:exported="false" /> <!-- DetailActivity -->
+            android:exported="false" />
+
+        <!-- DetailActivity -->
         <activity
             android:name=".Activity.DetailActivity"
-            android:exported="false" /> <!-- SignUpActivity -->
+            android:exported="false" />
+
+        <!-- SignUpActivity -->
         <activity
             android:name=".Activity.SignUpUserActivity"
-            android:exported="false" /> <!-- LoginUserActivity -->
+            android:exported="false" />
+
+        <!-- LoginUserActivity -->
         <activity
             android:name=".Activity.LoginUserActivity"
-            android:exported="false" /> <!-- CoursesPopularListActivity -->
+            android:exported="false" />
+
+        <!-- CoursesPopularListActivity -->
         <activity
             android:name=".Activity.CoursesPopularListActivity"
-            android:exported="false" /> <!-- CategoryListActivity -->
+            android:exported="false" />
+
+        <!-- CategoryListActivity -->
         <activity
             android:name=".Activity.CategoryListActivity"
-            android:exported="false" /> <!-- ProfileUserActivity -->
+            android:exported="false" />
+
+        <!-- ProfileUserActivity -->
         <activity
             android:name=".Activity.ProfileUserActivity"
-            android:exported="false" /> <!-- CourseCategoryIdActivity -->
+            android:exported="false" />
+
+        <!-- CourseCategoryIdActivity -->
         <activity
             android:name=".Activity.CourseCategoryIdActivity"
-            android:exported="false" /> <!-- IntroActivity -->
+            android:exported="false" />
+
+        <activity
+            android:name=".Activity.ManageCategoryActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activity.ManageCourseActivity"
+            android:exported="false" />
+
+        <!-- IntroActivity -->
         <activity
             android:name=".Activity.IntroActivity"
             android:exported="true">
@@ -56,7 +86,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Sửa đổi login ra trước Main (test chức năng Login) -->
+        </activity>
+        <!-- Sửa đổi login ra trước Main (test chức năng Login) -->
         <!-- MainActivity -->
         <activity
             android:name=".Activity.MainActivity"

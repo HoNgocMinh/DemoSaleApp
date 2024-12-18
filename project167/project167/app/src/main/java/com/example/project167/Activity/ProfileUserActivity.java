@@ -66,7 +66,6 @@ public class ProfileUserActivity extends AppCompatActivity {
         }
 
 
-
         // xử lí xác thực email
     if(!firebaseAuth.getCurrentUser().isEmailVerified()){
         btn_verifyEmail.setVisibility(View.VISIBLE);

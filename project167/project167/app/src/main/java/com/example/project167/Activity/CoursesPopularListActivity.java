@@ -108,7 +108,5 @@ public class CoursesPopularListActivity extends AppCompatActivity {
         return courses;
     }
 
-    private void setVariable() {
-        binding.backbtn.setOnClickListener(v -> finish());
-    }
+    private void setVariable() {binding.backbtn.setOnClickListener(v -> finish());}
 }
