@@ -1,10 +1,12 @@
 package com.example.project167.Activity;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -14,32 +16,38 @@ import android.widget.Toast;
 
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityProfileBinding;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class ProfileUserActivity extends AppCompatActivity {
-    ActivityProfileBinding binding;
 
+    ActivityProfileBinding binding;
     FirebaseAuth firebaseAuth;
     TextView txtUserFullName;
     Button btn_verifyEmail;
+    AlertDialog.Builder reset_alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        reset_alert = new AlertDialog.Builder(this);
 
         MainNavigation();
         CourseNavigation();
         LogoutNavigation();
         statusBarColor();
         resetPwd();
+        deleteAccount();
 
         // Liên kết TextView
         txtUserFullName = findViewById(R.id.txt_UserFullName);
+        btn_verifyEmail = findViewById(R.id.btn_verifyEmail);
 
         // Lấy thông tin từ Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance();
@@ -57,7 +65,7 @@ public class ProfileUserActivity extends AppCompatActivity {
             txtUserFullName.setText("Khách");
         }
 
-        btn_verifyEmail = findViewById(R.id.btn_verifyEmail);
+
 
         // xử lí xác thực email
     if(!firebaseAuth.getCurrentUser().isEmailVerified()){
@@ -96,6 +104,8 @@ public class ProfileUserActivity extends AppCompatActivity {
         binding.btnHome.setOnClickListener(v -> finish());
     }
 
+
+    //đăng xuất
     private void LogoutNavigation() {
         binding.btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +120,7 @@ public class ProfileUserActivity extends AppCompatActivity {
         });
     }
 
+    //đổi pwd
     private void resetPwd(){
         binding.btnChangePwd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +129,39 @@ public class ProfileUserActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void deleteAccount(){
+        binding.btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                reset_alert.setTitle("Xóa tài khoản?")
+                        .setMessage("Bạn chắc chưa? Bạn sợ à?")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                FirebaseUser user = firebaseAuth.getCurrentUser();
+                                user.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(ProfileUserActivity.this, "Xóa tài khoản thành công.", Toast.LENGTH_SHORT).show();
+                                        firebaseAuth.signOut();
+                                        startActivity(new Intent(getApplicationContext(), LoginUserActivity.class));
+                                        finish();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(ProfileUserActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        }).setNegativeButton("cancel", null)
+                        .create().show();
+            }
+        });
+
     }
 
     //chỉnh màu thanh trạng thái

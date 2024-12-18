@@ -1,5 +1,6 @@
 package com.example.project167.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
@@ -16,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.project167.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,15 +34,17 @@ public class LoginUserActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     AlertDialog.Builder reset_alert;
     LayoutInflater inflater;
+    private ImageView imageAvatar;
+    private Button btnChangeAvatar;
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         firebaseAuth = FirebaseAuth.getInstance();
-
 
         reset_alert = new AlertDialog.Builder(this);
         inflater = this.getLayoutInflater();
@@ -51,6 +56,14 @@ public class LoginUserActivity extends AppCompatActivity {
         txtSignUp = findViewById(R.id.txt_signup);
         txtAdminLogin = findViewById(R.id.txt_AdminLogin);
         txt_forgotPwd = findViewById(R.id.txt_forgotPwd);
+        imageAvatar = findViewById(R.id.imageAvatar);
+        btnChangeAvatar = findViewById(R.id.btnChangeAvatar);
+
+        // Hiển thị avatar hiện tại
+//        loadUserAvatar();
+//
+//        // Bắt sự kiện đổi avatar
+//        btnChangeAvatar.setOnClickListener(v -> openImagePicker());
 
         //chức năng quên mật khẩu
         txt_forgotPwd.setOnClickListener(new View.OnClickListener() {
@@ -154,5 +167,19 @@ public class LoginUserActivity extends AppCompatActivity {
         });
 
     }
+//
+//    //XỬ LÝ AVATAR
+//    private void loadUserAvatar() {
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        if (user != null && user.getPhotoUrl() != null) {
+//            Glide.with(this)
+//                    .load(user.getPhotoUrl())
+//                    .placeholder(R.drawable.default_avatar)
+//                    .into(imageAvatar);
+//        }
+//    }
 
 }
+
+
+
