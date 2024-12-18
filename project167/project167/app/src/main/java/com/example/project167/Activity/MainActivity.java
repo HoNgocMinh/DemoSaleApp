@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
                 // Nếu người dùng chưa đăng nhập, chuyển về trang Login
                 Toast.makeText(MainActivity.this, "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, LoginUserActivity.class));
-                finish();
             }
             // Nếu đã đăng nhập, chuyển sang trang
             else {

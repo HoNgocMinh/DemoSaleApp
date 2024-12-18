@@ -36,6 +36,7 @@ public class ProfileUserActivity extends AppCompatActivity {
         CourseNavigation();
         LogoutNavigation();
         statusBarColor();
+        resetPwd();
 
         // Liên kết TextView
         txtUserFullName = findViewById(R.id.txt_UserFullName);
@@ -108,6 +109,18 @@ public class ProfileUserActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void resetPwd(){
+        binding.btnChangePwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileUserActivity.this, ResetPassword.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
     //chỉnh màu thanh trạng thái
     private void statusBarColor() {
         Window window=ProfileUserActivity.this.getWindow();

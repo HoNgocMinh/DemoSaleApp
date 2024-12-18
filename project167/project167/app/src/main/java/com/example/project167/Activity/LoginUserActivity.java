@@ -1,9 +1,11 @@
 package com.example.project167.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project167.R;
@@ -18,13 +21,17 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginUserActivity extends AppCompatActivity {
 
     private EditText inputUserName, inputPassword;
     private Button btnLogin;
-    private TextView txtSignUp, txtAdminLogin;
+    private TextView txtSignUp, txtAdminLogin, txt_forgotPwd;
     FirebaseAuth firebaseAuth;
+    AlertDialog.Builder reset_alert;
+    LayoutInflater inflater;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +40,56 @@ public class LoginUserActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+
+        reset_alert = new AlertDialog.Builder(this);
+        inflater = this.getLayoutInflater();
+
         // Ánh xạ các thành phần giao diện
         inputUserName = findViewById(R.id.input_UserName);
         inputPassword = findViewById(R.id.input_Pwd);
         btnLogin = findViewById(R.id.btn_login);
         txtSignUp = findViewById(R.id.txt_signup);
         txtAdminLogin = findViewById(R.id.txt_AdminLogin);
+        txt_forgotPwd = findViewById(R.id.txt_forgotPwd);
 
+        //chức năng quên mật khẩu
+        txt_forgotPwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //start alertdialog
+
+                View view = inflater.inflate(R.layout.reset_pop, null);
+
+                reset_alert.setTitle("Quên mật khẩu?")
+                        .setMessage("Điền Email để nhận link reset mật khẩu.")
+                        .setPositiveButton("Reset", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //validate the email address
+                                EditText email = view.findViewById(R.id.rest_email_pop);
+                                if(email.getText().toString().isEmpty()){
+                                    email.setError("Vui lòng điền Email.");
+                                    return;
+                                }
+                                //send the reset link
+                                firebaseAuth.sendPasswordResetEmail(email.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(LoginUserActivity.this, "Đã gửi Email Reset mật khẩu.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(LoginUserActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                            }
+                        }).setNegativeButton("Hủy", null)
+                        .setView(view)
+                        .create().show();
+            }
+        });
 
 
         // Xử lý sự kiện chuyển sang màn hình đăng ký
@@ -92,6 +142,7 @@ public class LoginUserActivity extends AppCompatActivity {
                             intent = new Intent(LoginUserActivity.this, MainActivity.class);
                         }
                         startActivity(intent);
+                        finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
