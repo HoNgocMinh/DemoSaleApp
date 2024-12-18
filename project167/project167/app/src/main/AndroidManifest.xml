@@ -22,13 +22,8 @@
             android:exported="true" />
         <activity
             android:name=".Activity.ResetPassword"
-<<<<<<< HEAD
             android:exported="false" /> <!-- LoginAdminActivity -->
-=======
-            android:exported="false" />
 
-        <!-- LoginAdminActivity -->
->>>>>>> 962470a64c1e41b585b3c773f50536da559f4f1b
         <activity
             android:name=".Activity.LoginAdminActivity"
             android:exported="false" />
@@ -36,8 +31,9 @@
         <!-- ProfileAdminActivity -->
         <activity
             android:name=".Activity.ProfileAdminActivity"
-<<<<<<< HEAD
-            android:exported="false" /> <!-- CartActivity GIỎ HÀNG -->
+            android:exported="false" />
+
+        <!-- CartActivity GIỎ HÀNG -->
         <activity
             android:name=".Activity.CartActivity"
             android:exported="true"
@@ -54,16 +50,8 @@
                     android:scheme="demozpdk" />
             </intent-filter>
         </activity> <!-- DetailActivity -->
-=======
-            android:exported="false" />
-
-        <!-- CartActivity -->
-        <activity
-            android:name=".Activity.CartActivity"
-            android:exported="false" />
 
         <!-- DetailActivity -->
->>>>>>> 962470a64c1e41b585b3c773f50536da559f4f1b
         <activity
             android:name=".Activity.DetailActivity"
             android:exported="false" />

@@ -11,10 +11,6 @@ import androidx.core.content.ContextCompat;
 
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityProfileAdminBinding;
-<<<<<<< HEAD
-import com.example.project167.databinding.ActivityProfileBinding;
-=======
->>>>>>> 962470a64c1e41b585b3c773f50536da559f4f1b
 
 public class ProfileAdminActivity extends AppCompatActivity {
     ActivityProfileAdminBinding binding;
