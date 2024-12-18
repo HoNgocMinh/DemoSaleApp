@@ -116,7 +116,6 @@ public class ProfileUserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileUserActivity.this, ResetPassword.class);
                 startActivity(intent);
-                finish();
             }
         });
     }

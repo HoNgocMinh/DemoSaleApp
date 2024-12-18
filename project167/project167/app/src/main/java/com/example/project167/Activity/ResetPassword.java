@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -27,6 +28,7 @@ public class ResetPassword extends AppCompatActivity {
     Button btnConfirm;
     FirebaseUser user;
     FirebaseAuth auth;
+    TextView txtBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class ResetPassword extends AppCompatActivity {
         userRePwd = findViewById(R.id.newRePwd);
         userOldPwd = findViewById(R.id.oldUserPwd);
         btnConfirm = findViewById(R.id.btn_Confirm);
+        txtBack = findViewById(R.id.txtBack);
 
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -79,5 +82,7 @@ public class ResetPassword extends AppCompatActivity {
                 Toast.makeText(ResetPassword.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             });
         });
+        //Thêm điều hướng trở về đăng nhập
+        txtBack.setOnClickListener(v -> finish());
     }
 }
