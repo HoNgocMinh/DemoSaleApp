@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         txtUserFullName = findViewById(R.id.txt_UserName);
         txtHello = findViewById(R.id.txt_Hello);
 
+
         //Lấy giờ hiện tại, Xác định câu chào dựa vào giờ
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY); // Giờ hiện tại (0 - 23)
@@ -93,6 +94,13 @@ public class MainActivity extends AppCompatActivity {
         //check veriy mail
 
     }
+
+    private void updateCartItemCount() {
+        ManagmentCart cart = new ManagmentCart(this);
+        int cartItemCount = cart.getCartItemCount(); // Lấy số lượng khóa học trong giỏ
+        txticonNumber.setText(String.valueOf(cartItemCount)); // Hiển thị số lượng trên giao diện
+    }
+
 
     private void SeeMoreCourseNavigation(){
         binding.btnSeeMorePopularCourse.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CoursesPopularListActivity.class)));
@@ -144,5 +152,11 @@ public class MainActivity extends AppCompatActivity {
         //binding.PopularView.setLayoutManager(gridLayoutManager);
         binding.PopularView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         binding.PopularView.setAdapter(new PopularAdapter(items));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateCartItemCount();
     }
 }
