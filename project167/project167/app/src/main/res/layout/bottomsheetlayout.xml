@@ -44,7 +44,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layoutMomo"
+        android:id="@+id/layoutGooglePay"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,16 +54,16 @@
         android:padding="10dp">
 
 
-    <ImageView
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:src="@drawable/ic_momo_24"/>
+        <ImageView
+            android:layout_width="49dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_google_pay" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:text="Momo"
+            android:text="Google Pay"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:textColor="@color/dark_blue"
@@ -82,21 +82,21 @@
         android:paddingBottom="30dp"
         android:padding="10dp">
 
-    <ImageView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_zalopay"
-        />
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_zalopay" />
 
         <TextView
-            android:textStyle="bold"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="39dp"
             android:text="ZaloPay"
             android:textColor="@color/dark_blue"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

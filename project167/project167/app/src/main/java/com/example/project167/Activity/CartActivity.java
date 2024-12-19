@@ -27,6 +27,7 @@ import com.example.project167.Helper.ManagmentCart;
 import com.example.project167.PaymentNotification;
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityCartBinding;
+import com.google.android.gms.wallet.PaymentsClient;
 
 import org.json.JSONObject;
 
@@ -42,8 +43,11 @@ public class CartActivity extends AppCompatActivity {
     ActivityCartBinding binding;
     String txt_outthanhtien;
     String selectedPaymentMethod = "";
+
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+        protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCartBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -56,8 +60,10 @@ public class CartActivity extends AppCompatActivity {
         // ZaloPay SDK Init
         ZaloPaySDK.init(2553, Environment.SANDBOX);
 
+        //GG Pay
 
 
+        //aaaaaa
         managmentCart = new ManagmentCart(this);
 
         setVariable();
@@ -80,9 +86,9 @@ public class CartActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (selectedPaymentMethod.isEmpty()) {
                     Toast.makeText(CartActivity.this, "Vui lòng chọn phương thức thanh toán", Toast.LENGTH_SHORT).show();
-                } else if (selectedPaymentMethod.equals("Momo")) {
+                } else if (selectedPaymentMethod.equals("GooglePay")) {
                     //Thanh toán bằng momo
-                    Toast.makeText(CartActivity.this, "Thanh toán bằng Momo không khả dụng.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CartActivity.this, "Thanh toán bằng GooglePay không khả dụng.", Toast.LENGTH_SHORT).show();
                 }
                 else if(selectedPaymentMethod.equals("ZaloPay")){
                     //thanh tón zalopay
@@ -201,22 +207,22 @@ public class CartActivity extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottomsheetlayout);
 
-        LinearLayout momoLayout = dialog.findViewById(R.id.layoutMomo);
+        LinearLayout ggPayLayout = dialog.findViewById(R.id.layoutGooglePay);
         LinearLayout zalopayLayout = dialog.findViewById(R.id.layoutZaloPay);
         ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
         TextView txtPayment = findViewById(R.id.txt_Payment);
         ImageView imgPayment = findViewById(R.id.img_Payment);
 
-        momoLayout.setOnClickListener(new View.OnClickListener() {
+        ggPayLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 dialog.dismiss();
                 //Toast.makeText(CartActivity.this,"Momo được chọn",Toast.LENGTH_SHORT).show();
 
-                txtPayment.setText("Momo");
-                imgPayment.setImageResource(R.drawable.ic_momo_24);
-                selectedPaymentMethod = "Momo";
+                txtPayment.setText("GooglePay");
+                imgPayment.setImageResource(R.drawable.ic_google_pay);
+                selectedPaymentMethod = "GooglePay";
             }
         });
 

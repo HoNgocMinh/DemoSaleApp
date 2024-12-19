@@ -239,12 +239,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
 
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="10dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/textView23"
                         app:layout_constraintTop_toBottomOf="@+id/textView23"
-                        app:srcCompat="@drawable/ic_momo_24" />
+                        app:srcCompat="@drawable/credit_card" />
 
                     <TextView
                         android:id="@+id/txt_Payment"
@@ -252,7 +252,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:clickable="true"
-                        android:text="Momo"
+                        android:text="Chưa lựa chọn"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold"

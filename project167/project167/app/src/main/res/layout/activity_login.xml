@@ -43,7 +43,7 @@
             android:id="@+id/txt_UserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tên đăng nhập"
+            android:text="Email"
             android:textColor="@color/dark_blue"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -55,9 +55,8 @@
             android:layout_marginTop="12dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
-            android:hint="Nhập tên đăng nhập"
-
-            android:inputType="textPersonName"
+            android:hint="Nhập địa chỉ Email"
+            android:inputType="textEmailAddress"
             android:padding="12dp"
             android:textColor="#707070"
             android:textSize="18sp" />

@@ -23,6 +23,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -33,7 +35,7 @@ public class SignUpUserActivity extends AppCompatActivity {
     private Button btnSignUp;
     private TextView txtLogin;
     FirebaseAuth fAuth;
-
+    FirebaseFirestore fStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class SignUpUserActivity extends AppCompatActivity {
         txtLogin = findViewById(R.id.txt_login);
 
         fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
 
         // Xử lý sự kiện nút Đăng ký
         btnSignUp.setOnClickListener(v -> handleSignUp());
@@ -116,11 +119,13 @@ public class SignUpUserActivity extends AppCompatActivity {
                                         Log.d("Firebase", "User profile updated.");
 
                                         // Sau khi cập nhật thành công, chuyển đến trang đăng nhập
+
                                         //send verification email
                                         fAuth.getCurrentUser().sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
                                                 Toast.makeText(SignUpUserActivity.this, "Đăng ký thành công, đã gửi mail xác thực.", Toast.LENGTH_SHORT).show();
+                                                DocumentReference df = fStore.collection("Users").document();
                                             }
                                         });
                                         Intent intent = new Intent(SignUpUserActivity.this, LoginUserActivity.class);

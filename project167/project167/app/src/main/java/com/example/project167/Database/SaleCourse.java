@@ -80,10 +80,6 @@ public class SaleCourse extends SQLiteOpenHelper {
         // Tạo bảng reviews
         db.execSQL(CREATE_TABLE_REVIEWS);
 
-        //Khởi tạo data mặc định
-        db = this.getWritableDatabase();
-        BasicCategory(db);
-        BasicCourse(db);
     }
 
     @Override
