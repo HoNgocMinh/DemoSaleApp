@@ -28,6 +28,8 @@ import com.example.project167.PaymentNotification;
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityCartBinding;
 import com.google.android.gms.wallet.PaymentsClient;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONObject;
 
@@ -43,8 +45,7 @@ public class CartActivity extends AppCompatActivity {
     ActivityCartBinding binding;
     String txt_outthanhtien;
     String selectedPaymentMethod = "";
-
-
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -84,11 +85,24 @@ public class CartActivity extends AppCompatActivity {
         binding.btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // Lấy trạng thái đăng nhập
+                FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+
+                if (currentUser == null) {
+                    // Nếu người dùng chưa đăng nhập, chuyển về trang Login
+                    Toast.makeText(CartActivity.this, "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(CartActivity.this, LoginUserActivity.class);
+                    intent.putExtra("fromCart", true);
+                    startActivity(intent);
+
+                }
+
                 if (selectedPaymentMethod.isEmpty()) {
                     Toast.makeText(CartActivity.this, "Vui lòng chọn phương thức thanh toán", Toast.LENGTH_SHORT).show();
                 } else if (selectedPaymentMethod.equals("GooglePay")) {
-                    //Thanh toán bằng momo
-                    Toast.makeText(CartActivity.this, "Thanh toán bằng GooglePay không khả dụng.", Toast.LENGTH_SHORT).show();
+                    //Thanh toán bằng ggpay
+                    Toast.makeText(CartActivity.this, "Thanh toán bằng GooglePay chưa khả dụng.", Toast.LENGTH_SHORT).show();
                 }
                 else if(selectedPaymentMethod.equals("ZaloPay")){
                     //thanh tón zalopay
@@ -131,6 +145,8 @@ public class CartActivity extends AppCompatActivity {
 
 
     }
+
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);

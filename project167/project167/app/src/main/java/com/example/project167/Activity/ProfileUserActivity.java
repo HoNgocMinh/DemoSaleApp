@@ -115,6 +115,7 @@ public class ProfileUserActivity extends AppCompatActivity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 finish();
+                txtUserFullName.setText("Khách");
             }
         });
     }

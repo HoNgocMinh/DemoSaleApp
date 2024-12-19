@@ -183,9 +183,8 @@
                 android:text="description"
                 android:justificationMode="inter_word"
                 android:textAlignment="viewStart"
-                android:lineSpacingExtra="2dp"
+                android:lineSpacingExtra="3dp"
                 android:textColor="@color/dark_blue"
-                android:textStyle="bold"
                 android:textSize="15sp" />
 
             <androidx.appcompat.widget.AppCompatButton
