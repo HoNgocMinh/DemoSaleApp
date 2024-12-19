@@ -33,7 +33,7 @@ import java.util.Map;
 
 public class SignUpUserActivity extends AppCompatActivity {
 
-    private EditText inputFullName, inputUserName, inputPassword, inputRePassword;
+    private EditText inputFullName, inputUserName, inputPassword, inputRePassword, inputPhone;
     private Button btnSignUp;
     private TextView txtLogin;
     FirebaseAuth fAuth;
@@ -51,6 +51,7 @@ public class SignUpUserActivity extends AppCompatActivity {
         inputRePassword = findViewById(R.id.input_RePwd);
         btnSignUp = findViewById(R.id.btn_Signup);
         txtLogin = findViewById(R.id.txt_login);
+        inputPhone = findViewById(R.id.input_Phone);
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -69,6 +70,7 @@ public class SignUpUserActivity extends AppCompatActivity {
     private void handleSignUp() {
         String fullName = inputFullName.getText().toString().trim();
         String userName = inputUserName.getText().toString().trim();
+        String phone = inputPhone.getText().toString().trim();
         String password = inputPassword.getText().toString().trim();
         String rePassword = inputRePassword.getText().toString().trim();
 
@@ -129,7 +131,14 @@ public class SignUpUserActivity extends AppCompatActivity {
                                                 Toast.makeText(SignUpUserActivity.this, "Đăng ký thành công, đã gửi mail xác thực.", Toast.LENGTH_SHORT).show();
                                                 DocumentReference df = fStore.collection("Users").document(user.getUid());
                                                 Map<String,Object> userInfo = new HashMap<>();
-                                                //userInfo.put("Fullname",fullName.getText().toString());
+                                                userInfo.put("Fullname",fullName);
+                                                userInfo.put("UserEmail", userName);
+                                                userInfo.put("PhoneNumber", phone);
+                                                //user role
+
+                                                userInfo.put("isUser","1");
+
+                                                df.set(userInfo);
                                             }
                                         });
                                         Intent intent = new Intent(SignUpUserActivity.this, LoginUserActivity.class);

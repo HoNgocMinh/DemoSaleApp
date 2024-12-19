@@ -82,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        if (currentUser == null){
+            txtUserFullName.setText("Khách");
+        }
+
         //Lấy giờ hiện tại, Xác định câu chào dựa vào giờ
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY); // Giờ hiện tại (0 - 23)
@@ -98,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         txtHello.setText(greeting);
-
+        txtUserFullName.setText("Khách");
         // Lấy thông tin từ Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();

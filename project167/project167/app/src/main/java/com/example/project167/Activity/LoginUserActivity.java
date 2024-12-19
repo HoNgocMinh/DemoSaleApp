@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginUserActivity extends AppCompatActivity {
 
@@ -32,6 +36,7 @@ public class LoginUserActivity extends AppCompatActivity {
     private Button btnLogin;
     private TextView txtSignUp, txtAdminLogin, txt_forgotPwd;
     FirebaseAuth firebaseAuth;
+    FirebaseFirestore fStore;
     AlertDialog.Builder reset_alert;
     LayoutInflater inflater;
     private ImageView imageAvatar;
@@ -45,6 +50,7 @@ public class LoginUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
 
         reset_alert = new AlertDialog.Builder(this);
         inflater = this.getLayoutInflater();
@@ -141,20 +147,8 @@ public class LoginUserActivity extends AppCompatActivity {
                     public void onSuccess(AuthResult authResult) {
                      //login suceessful
                         Toast.makeText(LoginUserActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        checkUserAccessLevel(authResult.getUser().getUid());
 
-                        // Kiểm tra nếu người dùng đến từ Giỏ hàng
-                        Intent intent;
-                        boolean fromCart = getIntent().getBooleanExtra("fromCart", false);
-                        // Logic từ giỏ hàng về lại giỏ hàng sau đăng nhập
-                        if (fromCart) {
-                            // Nếu đến từ giỏ hàng, chuyển về lại giỏ hàng
-                            intent = new Intent(LoginUserActivity.this, CartActivity.class);
-                        } else {
-                            // Nếu không, chuyển đến MainActivity
-                            intent = new Intent(LoginUserActivity.this, MainActivity.class);
-                        }
-                        startActivity(intent);
-                        finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -165,6 +159,46 @@ public class LoginUserActivity extends AppCompatActivity {
             }
         });
 
+    };
+
+
+
+    private void checkUserAccessLevel(String uid) {
+        DocumentReference df = fStore.collection("Users").document(uid);
+        //get data
+        df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Log.d("TAG","OnSuccess: " + documentSnapshot.getData());
+
+                //check admin
+                if(documentSnapshot.getString("isAdmin")!=null){
+                    startActivity(new Intent(getApplicationContext(),ProfileAdminActivity.class));
+                    finish();
+                }
+
+                if(documentSnapshot.getString("isUser")!=null){
+                    checkUser();
+                }
+            }
+
+
+        });
+    }
+
+    private void checkUser() {
+        Intent intent;
+        boolean fromCart = getIntent().getBooleanExtra("fromCart", false);
+        // Logic từ giỏ hàng về lại giỏ hàng sau đăng nhập
+        if (fromCart) {
+            // Nếu đến từ giỏ hàng, chuyển về lại giỏ hàng
+            intent = new Intent(LoginUserActivity.this, CartActivity.class);
+        } else {
+            // Nếu không, chuyển đến MainActivity
+            intent = new Intent(LoginUserActivity.this, MainActivity.class);
+        }
+        startActivity(intent);
+        finish();
     }
 //
 //    //XỬ LÝ AVATAR

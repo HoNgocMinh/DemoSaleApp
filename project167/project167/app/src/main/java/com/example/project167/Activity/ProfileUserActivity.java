@@ -36,6 +36,7 @@ public class ProfileUserActivity extends AppCompatActivity {
 
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         reset_alert = new AlertDialog.Builder(this);
 
         MainNavigation();
@@ -43,6 +44,7 @@ public class ProfileUserActivity extends AppCompatActivity {
         LogoutNavigation();
         statusBarColor();
         resetPwd();
+        //myProfile();
         deleteAccount();
 
         // Liên kết TextView
@@ -103,7 +105,9 @@ public class ProfileUserActivity extends AppCompatActivity {
         binding.btnHome.setOnClickListener(v -> finish());
     }
 
-
+//    private void myProfile () {
+//        binding.btnMyInfo.setOnClickListener(view -> startActivity(new Intent(ProfileUserActivity.this,MyProfile.class)));
+//    }
     //đăng xuất
     private void LogoutNavigation() {
         binding.btnLogout.setOnClickListener(new View.OnClickListener() {

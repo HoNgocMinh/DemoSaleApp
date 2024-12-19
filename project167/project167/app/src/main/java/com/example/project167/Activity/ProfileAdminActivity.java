@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityProfileAdminBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileAdminActivity extends AppCompatActivity {
     ActivityProfileAdminBinding binding;
@@ -50,6 +51,7 @@ public class ProfileAdminActivity extends AppCompatActivity {
     private void LogoutNavigation() {
         binding.btnLogout.setOnClickListener(v -> {
             // Xóa trạng thái đăng nhập
+            FirebaseAuth.getInstance().signOut();
             SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("isLoggedIn", false);  // Đặt lại trạng thái là chưa đăng nhập
