@@ -15,7 +15,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,10 +23,8 @@ import android.widget.Toast;
 import com.example.project167.Adapter.CartAdapter;
 import com.example.project167.Api.CreateOrder;
 import com.example.project167.Helper.ManagmentCart;
-import com.example.project167.PaymentNotification;
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityCartBinding;
-import com.google.android.gms.wallet.PaymentsClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -116,21 +113,21 @@ public class CartActivity extends AppCompatActivity {
                             @Override
                             public void onPaymentSucceeded(String s, String s1, String s2) {
                                 Intent intent1 = new Intent(CartActivity.this, PaymentNotification.class);
-                                intent1.putExtra("result",1);
+                                intent1.putExtra("result","Thanh toán thành công");
                                 startActivity(intent1);
                             }
 
                             @Override
                             public void onPaymentCanceled(String s, String s1) {
                                 Intent intent1 = new Intent(CartActivity.this, PaymentNotification.class);
-                                intent1.putExtra("result",2);
+                                intent1.putExtra("result","Hủy thanh toán");
                                 startActivity(intent1);
                             }
 
                             @Override
                             public void onPaymentError(ZaloPayError zaloPayError, String s, String s1) {
                                 Intent intent1 = new Intent(CartActivity.this, PaymentNotification.class);
-                                intent1.putExtra("result",3);
+                                intent1.putExtra("result","Có lỗi xảy ra");
                                 startActivity(intent1);
                             }
                         });

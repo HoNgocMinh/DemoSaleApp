@@ -1,4 +1,4 @@
-package com.example.project167;
+package com.example.project167.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,18 +7,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.project167.Activity.MainActivity;
+import com.example.project167.R;
 
 public class PaymentNotification extends AppCompatActivity {
 
     TextView txtNotification;
-    ImageView img_payment_status;
+    //ImageView img_payment_status;
     Button btn_back;
 
     @Override
@@ -36,7 +32,7 @@ public class PaymentNotification extends AppCompatActivity {
 
 
         txtNotification = findViewById(R.id.textViewNotify);
-        img_payment_status = findViewById(R.id.img_payment_status);
+        //img_payment_status = findViewById(R.id.img_payment_status);
 
         Intent intent = getIntent();
         txtNotification.setText(intent.getStringExtra("result"));
@@ -47,6 +43,4 @@ public class PaymentNotification extends AppCompatActivity {
         startActivity(intent);
         finish(); // Kết thúc Activity hiện tại (nếu cần)
     }
-
-
 }

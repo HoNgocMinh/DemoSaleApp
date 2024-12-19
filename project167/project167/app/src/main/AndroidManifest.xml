@@ -22,7 +22,7 @@
             android:value="true" />
 
         <activity
-            android:name=".PaymentNotification"
+            android:name=".Activity.PaymentNotification"
             android:exported="true" />
         <activity
             android:name=".Activity.ResetPassword"
@@ -36,6 +36,9 @@
         <activity
             android:name=".Activity.ProfileAdminActivity"
             android:exported="false" />
+
+        <activity android:name=".Activity.MyCourseActivity"
+            android:exported="false"/>
 
         <!-- CartActivity GIỎ HÀNG -->
         <activity

@@ -41,6 +41,7 @@ public class ProfileUserActivity extends AppCompatActivity {
         MainNavigation();
         CourseNavigation();
         LogoutNavigation();
+        MyCourseNavigation();
         statusBarColor();
         resetPwd();
         deleteAccount();
@@ -86,6 +87,10 @@ public class ProfileUserActivity extends AppCompatActivity {
         }
     });
 
+    }
+
+    private void MyCourseNavigation(){
+        binding.btnMyCourse.setOnClickListener(v -> startActivity(new Intent(ProfileUserActivity.this, MyCourseActivity.class)));
     }
 
     private void CourseNavigation() {
