@@ -181,7 +181,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
-                        app:srcCompat="@drawable/cat1" />
+                        app:srcCompat="@drawable/ic_cate_dev" />
 
                     <TextView
                         android:id="@+id/txt_Category1"
@@ -205,7 +205,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
-                        app:srcCompat="@drawable/cat2" />
+                        app:srcCompat="@drawable/ic_cate_language" />
 
                     <TextView
                         android:id="@+id/txt_Category2"
@@ -229,7 +229,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
-                        app:srcCompat="@drawable/cat3" />
+                        app:srcCompat="@drawable/ic_cate_design" />
 
                     <TextView
                         android:id="@+id/txt_Category3"
@@ -253,7 +253,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
-                        app:srcCompat="@drawable/cat4" />
+                        app:srcCompat="@drawable/ic_cate_cook" />
 
                     <TextView
                         android:id="@+id/txt_Category4"

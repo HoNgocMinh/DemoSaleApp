@@ -170,9 +170,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         ArrayList<PopularDomain> items=new ArrayList<>();
-        items.add(new PopularDomain("lập trình web","ic_1",3,5,500,"Học cùng thầy X"));
-        items.add(new PopularDomain("Công nghệ phần mềm","ic_3",2,4.5,450,"Học cùng cô Y"));
-        items.add(new PopularDomain("Nấu ăn ngon mỗi ngày","ic_2",3,4.9,800,"Học cùng thầy Bẻo"));
+
+        items.add(new PopularDomain("Lập trình trên Mobile","ic_dev_mobile",1,5,1700,"Không cần phải là “thần code”, bạn vẫn có thể xây dựng các ứng dụng chạy mượt mà trên Android chỉ với những cú click chuột và vài dòng lệnh. Thầy Dương Thái Bảo – giảng viên cực kỳ tâm huyết (và cũng không thiếu sự đẹp trai) sẽ hướng dẫn bạn từ những bước đầu tiên của lập trình di động cho đến khi bạn có thể tự tay tạo ra ứng dụng cực “ngon”. Hãy chuẩn bị tinh thần vừa học vừa cười, vì “code” trong tay, tiếng cười (mếu) trong lòng!"));
+        items.add(new PopularDomain("Kỹ thuật nấu ăn cơ bản","ic_cook_coban",1,5,1200,"Khóa học này cung cấp những kỹ năng cần thiết cho người mới bắt đầu. Bạn sẽ học cách cắt thái, chế biến nguyên liệu và áp dụng các phương pháp nấu ăn đơn giản như xào, luộc, hầm. Đây là nền tảng vững chắc giúp bạn tự tin vào bếp và sáng tạo với những món ăn ngon mỗi ngày."));
+        items.add(new PopularDomain("Thiết kế thời trang","ic_design_fashion",1,3,1500,"Khóa học này sẽ giúp bạn hiểu rõ về quy trình thiết kế thời trang, từ việc vẽ phác thảo ý tưởng đến việc hoàn thiện bộ sưu tập. Bạn sẽ được học các kỹ năng may mặc cơ bản và cách thức phát triển một bộ sưu tập thời trang đầy sáng tạo."));
+        items.add(new PopularDomain("Ngữ pháp tiếng Anh","ic_course_eng",1,4,1200,"Khóa học ngữ pháp tiếng Anh này sẽ giúp bạn hiểu rõ các cấu trúc ngữ pháp từ cơ bản đến nâng cao. Bạn sẽ cải thiện khả năng viết và nói tiếng Anh một cách chính xác, từ đó giao tiếp tự tin hơn trong mọi tình huống."));
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         //binding.PopularView.setLayoutManager(gridLayoutManager);
