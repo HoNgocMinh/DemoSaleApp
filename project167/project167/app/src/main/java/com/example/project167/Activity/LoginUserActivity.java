@@ -57,7 +57,6 @@ public class LoginUserActivity extends AppCompatActivity {
         txtAdminLogin = findViewById(R.id.txt_AdminLogin);
         txt_forgotPwd = findViewById(R.id.txt_forgotPwd);
         imageAvatar = findViewById(R.id.imageAvatar);
-        btnChangeAvatar = findViewById(R.id.btnChangeAvatar);
 
         // Hiển thị avatar hiện tại
 //        loadUserAvatar();
