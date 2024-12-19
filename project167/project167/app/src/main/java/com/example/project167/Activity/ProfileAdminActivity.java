@@ -23,7 +23,19 @@ public class ProfileAdminActivity extends AppCompatActivity {
         LogoutNavigation();
         ManageCategoryNavigation();
         ManageCourseNavigation();
+        MainNavigation();
+        CourseNavigation();
         statusBarColor();
+    }
+
+    //Chuyển hướng trang chủ
+    private void MainNavigation(){
+        binding.btnHome.setOnClickListener(v -> startActivity(new Intent(ProfileAdminActivity.this, MainActivity.class)));
+    }
+
+    //Chuyển hướng khóa học
+    private void CourseNavigation(){
+        binding.btnMyCourse.setOnClickListener(v -> startActivity(new Intent(ProfileAdminActivity.this, CoursesPopularListActivity.class)));
     }
 
     //Chuyển hướng quản lí danh mục

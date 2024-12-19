@@ -79,7 +79,10 @@ public class SaleCourse extends SQLiteOpenHelper {
 
         // Tạo bảng reviews
         db.execSQL(CREATE_TABLE_REVIEWS);
+<<<<<<< HEAD
 
+=======
+>>>>>>> fc5abd08e21fe100eebceb011d18b79382fad9d3
     }
 
     @Override
@@ -184,5 +187,13 @@ public class SaleCourse extends SQLiteOpenHelper {
     public Cursor getCoursesByCategoryId(int categoryId) {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM courses WHERE category_id = ?", new String[]{String.valueOf(categoryId)});
+    }
+
+    //Xóa danh mục ra khỏi data
+    public boolean deleteCategory(int categoryId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsAffected = db.delete("categories", "category_id = ?", new String[]{String.valueOf(categoryId)});
+        db.close();
+        return rowsAffected > 0; // Trả về true nếu xóa thành công
     }
 }

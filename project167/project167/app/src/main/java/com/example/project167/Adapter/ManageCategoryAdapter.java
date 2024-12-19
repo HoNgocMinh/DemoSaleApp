@@ -3,11 +3,13 @@ package com.example.project167.Adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.project167.R;
 import com.example.project167.databinding.ViewholderInfoBinding;
 import com.example.project167.domain.CategoryDomain;
 
@@ -16,15 +18,23 @@ import java.util.ArrayList;
 public class ManageCategoryAdapter extends RecyclerView.Adapter<ManageCategoryAdapter.ViewHolder> {
     private ArrayList<CategoryDomain> categoryList;
     private Context context;
+    private OnCategoryDeleteListener deleteListener;
 
-    public ManageCategoryAdapter(ArrayList<CategoryDomain> categoryList) {
+    // Constructor với callback cho việc xóa mục
+    public ManageCategoryAdapter(ArrayList<CategoryDomain> categoryList, OnCategoryDeleteListener deleteListener) {
         this.categoryList = categoryList;
+        this.deleteListener = deleteListener;
+    }
+
+    // Interface để xử lý sự kiện xóa
+    public interface OnCategoryDeleteListener {
+        void onDelete(int position);
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate the item view using ViewBinding
+        // Inflate item view using ViewBinding
         ViewholderInfoBinding binding = ViewholderInfoBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
@@ -47,6 +57,14 @@ public class ManageCategoryAdapter extends RecyclerView.Adapter<ManageCategoryAd
         Glide.with(context)
                 .load(drawableResourceId)
                 .into(holder.binding.pic);
+
+        // Handle the delete button click
+        holder.binding.btnDelete.setOnClickListener(v -> {
+            // Gọi phương thức delete từ Activity hoặc Fragment
+            if (deleteListener != null) {
+                deleteListener.onDelete(position);
+            }
+        });
     }
 
     @Override

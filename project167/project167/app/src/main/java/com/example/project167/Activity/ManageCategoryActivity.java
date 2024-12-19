@@ -4,13 +4,16 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.project167.Adapter.ManageCategoryAdapter;
 import com.example.project167.Database.SaleCourse;
 import com.example.project167.R;
 import com.example.project167.databinding.ActivityAdminCategoryListBinding;
 import com.example.project167.domain.CategoryDomain;
+
 import java.util.ArrayList;
 
 public class ManageCategoryActivity extends AppCompatActivity {
@@ -74,7 +77,24 @@ public class ManageCategoryActivity extends AppCompatActivity {
 
     private void setupRecyclerView() {
         // Tạo và gán adapter cho RecyclerView
-        manageCategoryAdapter = new ManageCategoryAdapter(categoryList);
+        manageCategoryAdapter = new ManageCategoryAdapter(categoryList, position -> {
+            // Lấy category cần xóa từ danh sách
+            CategoryDomain categoryToDelete = categoryList.get(position);
+            String deletedCategoryName = categoryToDelete.getName();
+
+            // Xóa mục khỏi cơ sở dữ liệu
+            boolean isDeleted = saleCourse.deleteCategory(categoryToDelete.getId());
+            if (isDeleted) {
+                // Xóa mục khỏi danh sách
+                categoryList.remove(position);
+                manageCategoryAdapter.notifyItemRemoved(position);
+                Toast.makeText(ManageCategoryActivity.this, "Đã xóa danh mục: " + deletedCategoryName, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(ManageCategoryActivity.this, "Không thể xóa danh mục: " + deletedCategoryName, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Cài đặt RecyclerView
         binding.view.setLayoutManager(new LinearLayoutManager(this));
         binding.view.setAdapter(manageCategoryAdapter);
     }
