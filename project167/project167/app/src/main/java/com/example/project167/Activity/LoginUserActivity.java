@@ -109,7 +109,6 @@ public class LoginUserActivity extends AppCompatActivity {
             }
         });
 
-
         // Xử lý sự kiện chuyển sang màn hình đăng ký
         txtSignUp.setOnClickListener(v -> {
             Intent intent = new Intent(LoginUserActivity.this, SignUpUserActivity.class);
