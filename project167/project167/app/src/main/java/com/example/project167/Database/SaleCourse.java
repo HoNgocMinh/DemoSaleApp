@@ -165,7 +165,7 @@ public class SaleCourse extends SQLiteOpenHelper {
                 values.put("category_id", 1);
                 db.insert(COURSES, null, values);
 
-                values.put(COURSE_NAME, "Bánh ngọt và tráng miệng");
+                values.put(COURSE_NAME, "Tráng miệng? Dễ!");
                 values.put(COURSE_PRICE, 1800);
                 values.put(COURSE_PICTURE, "ic_cook_dessert");
                 values.put(COURSE_SCORE, 4.0);
@@ -219,7 +219,7 @@ public class SaleCourse extends SQLiteOpenHelper {
                 values.put("category_id", 3);
                 db.insert(COURSES, null, values);
 
-                values.put(COURSE_NAME, "Phong cách thời trang cá nhân");
+                values.put(COURSE_NAME, "Thời trang cá nhân");
                 values.put(COURSE_PRICE, 1400);
                 values.put(COURSE_PICTURE, "ic_fashion_personal");
                 values.put(COURSE_SCORE, 4.0);
@@ -237,7 +237,7 @@ public class SaleCourse extends SQLiteOpenHelper {
                 values.put("category_id", 3);
                 db.insert(COURSES, null, values);
 
-                values.put(COURSE_NAME, "Tổ chức sự kiện thời trang");
+                values.put(COURSE_NAME, "Sự kện thời trang");
                 values.put(COURSE_PRICE, 1800);
                 values.put(COURSE_PICTURE, "ic_fashion_event");
                 values.put(COURSE_SCORE, 4.0);
@@ -291,7 +291,7 @@ public class SaleCourse extends SQLiteOpenHelper {
                 values.put("category_id", 5);
                 db.insert(COURSES, null, values);
 
-                values.put(COURSE_NAME, "lập trình JavaScript");
+                values.put(COURSE_NAME, "Lập trình JavaScript");
                 values.put(COURSE_PRICE, 1800);
                 values.put(COURSE_PICTURE, "ic_dev_js");
                 values.put(COURSE_SCORE, 5.0);
@@ -319,7 +319,7 @@ public class SaleCourse extends SQLiteOpenHelper {
                 db.insert(COURSES, null, values);
 
                 values.put(COURSE_NAME, "Lập trình trên Mobile");
-                values.put(COURSE_PRICE, 1700);
+                values.put(COURSE_PRICE, 3700);
                 values.put(COURSE_PICTURE, "ic_dev_mobile");
                 values.put(COURSE_SCORE, 5.0);
                 values.put(COURSE_COUNT_REVIEW,1);
