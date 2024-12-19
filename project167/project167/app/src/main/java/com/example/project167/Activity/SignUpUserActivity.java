@@ -28,6 +28,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpUserActivity extends AppCompatActivity {
 
@@ -125,7 +127,9 @@ public class SignUpUserActivity extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(Void aVoid) {
                                                 Toast.makeText(SignUpUserActivity.this, "Đăng ký thành công, đã gửi mail xác thực.", Toast.LENGTH_SHORT).show();
-                                                DocumentReference df = fStore.collection("Users").document();
+                                                DocumentReference df = fStore.collection("Users").document(user.getUid());
+                                                Map<String,Object> userInfo = new HashMap<>();
+                                                //userInfo.put("Fullname",fullName.getText().toString());
                                             }
                                         });
                                         Intent intent = new Intent(SignUpUserActivity.this, LoginUserActivity.class);
