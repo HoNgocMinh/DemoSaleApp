@@ -47,11 +47,8 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.6.0")
     implementation("commons-codec:commons-codec:1.14")
     implementation 'com.google.firebase:firebase-firestore:25.1.1'
-<<<<<<< HEAD
-    implementation "com.google.android.gms:play-services-wallet:18.0.0"
 
-=======
+    implementation "com.google.android.gms:play-services-wallet:18.0.0"
     implementation fileTree(dir: 'D:\\ZaloPay_Setup\\ZaloPayLib', include: ['*.aar', '*.jar'], exclude: [])
->>>>>>> fc5abd08e21fe100eebceb011d18b79382fad9d3
 
 }

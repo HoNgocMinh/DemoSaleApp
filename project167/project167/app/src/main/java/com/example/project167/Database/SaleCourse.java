@@ -79,10 +79,7 @@ public class SaleCourse extends SQLiteOpenHelper {
 
         // Tạo bảng reviews
         db.execSQL(CREATE_TABLE_REVIEWS);
-<<<<<<< HEAD
 
-=======
->>>>>>> fc5abd08e21fe100eebceb011d18b79382fad9d3
     }
 
     @Override
