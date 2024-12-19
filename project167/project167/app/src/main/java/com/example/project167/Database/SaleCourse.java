@@ -309,7 +309,7 @@ public class SaleCourse extends SQLiteOpenHelper {
                 values.put("category_id", 5);
                 db.insert(COURSES, null, values);
 
-                values.put(COURSE_NAME, " Lập trình với React Native");
+                values.put(COURSE_NAME, "Lập trình React Native");
                 values.put(COURSE_PRICE, 1900);
                 values.put(COURSE_PICTURE, "ic_dev_react");
                 values.put(COURSE_SCORE, 4.0);

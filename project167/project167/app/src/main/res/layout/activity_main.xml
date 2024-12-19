@@ -185,12 +185,13 @@
 
                     <TextView
                         android:id="@+id/txt_Category1"
+                        android:textStyle=""
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="Lập trình"
                         android:textAlignment="center"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/dark_blue" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -214,7 +215,7 @@
                         android:layout_marginTop="8dp"
                         android:text="Ngôn ngữ"
                         android:textAlignment="center"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/dark_blue" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -238,7 +239,7 @@
                         android:layout_marginTop="8dp"
                         android:text="Thiết kế"
                         android:textAlignment="center"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/dark_blue" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -262,7 +263,7 @@
                         android:layout_marginTop="8dp"
                         android:text="Nấu ăn"
                         android:textAlignment="center"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/dark_blue" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -287,7 +288,7 @@
                         android:layout_marginTop="8dp"
                         android:text="Xem tất cả"
                         android:textAlignment="center"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/dark_blue" />
                 </LinearLayout>
             </LinearLayout>
 
